@@ -92,8 +92,16 @@ extension MainViewController {
             }
             switch section {
             case .mainSection:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.reuseId, for: indexPath)
-                // code
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.reuseId, for: indexPath) as! NewsCell
+                cell.image = info
+                cell.dateLabel.text = "Start date: \(info.dateUTC ?? "no data")"
+                cell.nameLabel.text = "Rocket name: \(info.name ?? "no data")"
+                cell.successLabel.text = "\(info.success ?? false)"
+                if cell.successLabel.text == "false" {
+                    cell.successLabel.text = "Launch failed"
+                } else if cell.successLabel.text == "true" {
+                    cell.successLabel.text = "Launch successed"
+                }
                 return cell
             }
         }
