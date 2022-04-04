@@ -41,6 +41,7 @@ class MainViewController: UIViewController {
         
         collectionView.register(NewsCell.self, forCellWithReuseIdentifier: NewsCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
+        collectionView.delegate = self
     }
 }
 
@@ -71,7 +72,6 @@ extension MainViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .fractionalHeight(0.1))
         
-//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
                 
@@ -95,12 +95,21 @@ extension MainViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.reuseId, for: indexPath) as! NewsCell
                 cell.image = info
                 cell.dateLabel.text = "Start date: \(info.dateUTC ?? "no data")"
-                cell.nameLabel.text = "Rocket name: \(info.name ?? "no data")"
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd MMMM, yyyy"
+                let date = dateFormatter.date(from: cell.dateLabel.text ?? "")
+                let dateSring = dateFormatter.string(from: date ?? Date())
+                
+                cell.dateLabel.text = dateSring
+                cell.nameLabel.text = "\(info.name ?? "no data")"
+                
                 cell.successLabel.text = "\(info.success ?? false)"
                 if cell.successLabel.text == "false" {
                     cell.successLabel.text = "Launch failed"
+                    cell.successLabel.textColor = .mainRed()
                 } else if cell.successLabel.text == "true" {
                     cell.successLabel.text = "Launch successed"
+                    cell.successLabel.textColor = .mainGreen()
                 }
                 return cell
             }
@@ -132,3 +141,9 @@ extension MainViewController {
     }
 }
 
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let launchInfo = dataSource.itemIdentifier(for: indexPath) else { return }
+        print(launchInfo.name)
+    }
+}
