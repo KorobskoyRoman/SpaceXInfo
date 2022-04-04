@@ -14,7 +14,15 @@ class NewsCell: UICollectionViewCell {
     static var reuseId = "reuseId"
     
     var imagePhoto = UIImageView()
-    var dateLabel = UILabel()
+    var dateLabel: UILabel = {
+        let label = UILabel()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd,yyyy"
+        let date = dateFormatter.date(from: label.text ?? "")
+        let dateSring = dateFormatter.string(from: date ?? Date())
+        label.text = dateSring
+        return label
+    }()
     var nameLabel = UILabel()
     var successLabel = UILabel()
     
@@ -76,22 +84,21 @@ class NewsCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: -30),
+            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: -30),
+            nameLabel.leadingAnchor.constraint(equalTo: imagePhoto.trailingAnchor, constant: 10),
+            nameLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: -30),
             dateLabel.leadingAnchor.constraint(equalTo: imagePhoto.trailingAnchor, constant: 10),
-            dateLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             dateLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: -30),
-            nameLabel.leadingAnchor.constraint(equalTo: imagePhoto.trailingAnchor, constant: 10),
-            nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50)
-        ])
-        
-        NSLayoutConstraint.activate([
-            successLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: -20),
-            successLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 2),
-            successLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            successLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            successLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 1),
+            successLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
     }
 }
