@@ -106,18 +106,12 @@ extension MainViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.reuseId, for: indexPath) as! NewsCell
                 cell.image = info
 //                cell.dateLabel.text = "Start date: \(info.dateUTC ?? "no data")"
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-                dateFormatter.dateFormat = "yyyy-mm-dd'T'HH:mm:ss+12:00"
-                
-                let date = dateFormatter.date(from: info.dateUTC!)
-                print(date)
-                let dateSring = dateFormatter.string(from: date ?? Date())
-                print(dateSring)
-                
-                cell.dateLabel.text = dateSring
+                // << костыль с датой
+                let date = info.dateUTC?.firstIndex(of: "T")
+                let updatedDate = info.dateUTC![..<date!]
+                cell.dateLabel.text = "Start date: \(updatedDate)"
                 cell.nameLabel.text = "\(info.name ?? "no data")"
-                
+                // >>
                 cell.successLabel.text = "\(info.success ?? false)"
                 if cell.successLabel.text == "false" {
                     cell.successLabel.text = "Launch failed"
