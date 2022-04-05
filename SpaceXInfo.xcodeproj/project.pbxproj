@@ -19,6 +19,7 @@
 		9CFC778227F76B7700E50FCA /* LaunchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC778127F76B7700E50FCA /* LaunchModel.swift */; };
 		9CFC778527F77A7600E50FCA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC778427F77A7600E50FCA /* NetworkManager.swift */; };
 		9CFC778827FCB01200E50FCA /* ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC778727FCB01200E50FCA /* ShowAlert.swift */; };
+		9CFC778A27FCBAD000E50FCA /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC778927FCBAD000E50FCA /* UIView + Extension.swift */; };
 		B51B5431D79D19EAEE3A667F /* Pods_SpaceXInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF58F9744C1A59DDA3D954ED /* Pods_SpaceXInfo.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		9CFC778127F76B7700E50FCA /* LaunchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchModel.swift; sourceTree = "<group>"; };
 		9CFC778427F77A7600E50FCA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9CFC778727FCB01200E50FCA /* ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlert.swift; sourceTree = "<group>"; };
+		9CFC778927FCBAD000E50FCA /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		BF58F9744C1A59DDA3D954ED /* Pods_SpaceXInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpaceXInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -136,6 +138,7 @@
 			children = (
 				9CFC777D27F7669B00E50FCA /* SectionHeader.swift */,
 				9CFC777F27F767AD00E50FCA /* UIColor + Extension.swift */,
+				9CFC778927FCBAD000E50FCA /* UIView + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				9CFC778227F76B7700E50FCA /* LaunchModel.swift in Sources */,
 				9CFC778027F767AD00E50FCA /* UIColor + Extension.swift in Sources */,
 				9CFC776527F7564200E50FCA /* MainViewController.swift in Sources */,
+				9CFC778A27FCBAD000E50FCA /* UIView + Extension.swift in Sources */,
 				9CFC777827F75A5800E50FCA /* Section.swift in Sources */,
 				9CFC778827FCB01200E50FCA /* ShowAlert.swift in Sources */,
 				9CFC777E27F7669B00E50FCA /* SectionHeader.swift in Sources */,

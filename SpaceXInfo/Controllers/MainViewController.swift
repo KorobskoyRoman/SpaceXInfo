@@ -26,14 +26,17 @@ class MainViewController: UIViewController {
     }
     
     private func fetchData() {
+        self.collectionView.showLoading(style: .large, color: .mainRed())
         self.networkManager.fetchLaunches { result in
             if result != [Result]() {
                 self.launches = result
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.applySnapshot()
+                    self.collectionView.stopLoading()
                 }
             } else {
                 showAlert(title: "Error", message: "No internet", controller: self)
+                self.collectionView.stopLoading()
             }
         }
     }
@@ -102,11 +105,15 @@ extension MainViewController {
             case .mainSection:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.reuseId, for: indexPath) as! NewsCell
                 cell.image = info
-                cell.dateLabel.text = "Start date: \(info.dateUTC ?? "no data")"
+//                cell.dateLabel.text = "Start date: \(info.dateUTC ?? "no data")"
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd MMMM, yyyy"
-                let date = dateFormatter.date(from: cell.dateLabel.text ?? "")
+                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                dateFormatter.dateFormat = "yyyy-mm-dd'T'HH:mm:ss+12:00"
+                
+                let date = dateFormatter.date(from: info.dateUTC!)
+                print(date)
                 let dateSring = dateFormatter.string(from: date ?? Date())
+                print(dateSring)
                 
                 cell.dateLabel.text = dateSring
                 cell.nameLabel.text = "\(info.name ?? "no data")"

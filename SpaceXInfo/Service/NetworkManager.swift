@@ -22,7 +22,7 @@ class NetworkManager {
                 return }
 //            print(String(data: data, encoding: .utf8))
             if let fetchData = self.parseJSON(type: [Result].self, data: data) {
-                print("data fetch: \(fetchData)")
+//                print("data fetch: \(fetchData)")
                 completion(fetchData)
             }
         }
@@ -36,7 +36,7 @@ class NetworkManager {
         }
         do {
             let parseData = try decoder.decode(T.self, from: data)
-            print("parsing json data: \(parseData)")
+//            print("parsing json data: \(parseData)")
             return parseData
         } catch let jsonError {
             print("error pasring json: \(jsonError)")
