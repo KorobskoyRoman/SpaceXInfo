@@ -22,10 +22,18 @@ class MainViewController: UIViewController {
         view.backgroundColor = .mainWhite()
         setupCollectionView()
         applySnapshot()
+        fetchData()
+    }
+    
+    private func fetchData() {
         self.networkManager.fetchLaunches { result in
-            self.launches = result
-            DispatchQueue.main.async {
-                self.applySnapshot()
+            if result != [Result]() {
+                self.launches = result
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.applySnapshot()
+                }
+            } else {
+                showAlert(title: "Error", message: "No internet", controller: self)
             }
         }
     }

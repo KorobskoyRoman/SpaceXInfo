@@ -18,7 +18,8 @@ class NetworkManager {
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: urlString) {  data, response, error in
-            guard let data = data else { return }
+            guard let data = data else {
+                return }
 //            print(String(data: data, encoding: .utf8))
             if let fetchData = self.parseJSON(type: [Result].self, data: data) {
                 print("data fetch: \(fetchData)")
