@@ -17,12 +17,12 @@ struct Result: Codable, Hashable {
     let links: Links
     let rocket: String?
     let success: Bool?
-    let failures: [Failure]
+//    let failures: [Failure]
     let details: String?
     let name, dateUTC: String?
     
     enum CodingKeys: String, CodingKey {
-        case links, rocket, success, failures, details, name
+        case links, rocket, success, details, name
         case dateUTC = "date_utc"
     }
     
@@ -41,10 +41,10 @@ struct Links: Codable {
     let article: String?
 }
 
-struct Failure: Codable {
-    let time: Int
-    let reason: String
-}
+//struct Failure: Codable {
+//    let time: Int
+//    let reason: String
+//}
 
 struct Patch: Codable {
     let small: String?

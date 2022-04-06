@@ -7,5 +7,6 @@ target 'SpaceXInfo' do
 
   # Pods for SpaceXInfo
 pod 'SDWebImage'
+pod 'youtube-ios-player-helper'
 
 end

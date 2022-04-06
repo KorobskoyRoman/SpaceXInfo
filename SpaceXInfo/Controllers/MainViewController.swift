@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .mainWhite()
         collectionView.allowsMultipleSelection = true
-        title = "Photos"
+        title = "SpaceX launches"
         
         collectionView.register(NewsCell.self, forCellWithReuseIdentifier: NewsCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
@@ -110,8 +110,8 @@ extension MainViewController {
                 let date = info.dateUTC?.firstIndex(of: "T")
                 let updatedDate = info.dateUTC![..<date!]
                 cell.dateLabel.text = "Start date: \(updatedDate)"
-                cell.nameLabel.text = "\(info.name ?? "no data")"
                 // >>
+                cell.nameLabel.text = "\(info.name ?? "no data")"
                 cell.successLabel.text = "\(info.success ?? false)"
                 if cell.successLabel.text == "false" {
                     cell.successLabel.text = "Launch failed"
@@ -153,6 +153,17 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let launchInfo = dataSource.itemIdentifier(for: indexPath) else { return }
-        print(launchInfo.name)
+//        print(launchInfo.name)
+        guard let section = Section(rawValue: indexPath.section) else { fatalError("No section") }
+        switch section {
+        case .mainSection:
+            let cell = collectionView.cellForItem(at: indexPath) as! NewsCell
+            let detailsVC = DetailsViewController()
+            let image = cell.image
+            detailsVC.photo = image
+//            detailsVC.ytLink = launchInfo.links.webcast
+//            detailsVC.failures = launchInfo.failures
+            navigationController?.pushViewController(detailsVC, animated: true)
+        }
     }
 }
