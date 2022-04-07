@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import SDWebImage
-import youtube_ios_player_helper
 
 class DetailsViewController: UIViewController {
     
@@ -25,7 +24,6 @@ class DetailsViewController: UIViewController {
         
         setupCollectionView()
         applySnapshot()
-        view.backgroundColor = .mainRed()
     }
     
     private func setupCollectionView() {
@@ -65,7 +63,7 @@ extension DetailsViewController {
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalWidth(1.5))
+                                               heightDimension: .absolute(400))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
