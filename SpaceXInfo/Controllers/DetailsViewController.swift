@@ -17,12 +17,8 @@ class DetailsViewController: UIViewController {
     
     private var collectionView: UICollectionView!
     private lazy var dataSource = createDiffableDataSource()
-    
-    var name: String?
-    var launchPhoto = UIImageView()
-    var ytLink: String?
-    
-    var photo: Result!
+
+    var info: Result!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +39,6 @@ class DetailsViewController: UIViewController {
         collectionView.register(InfoCell.self, forCellWithReuseIdentifier: InfoCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        collectionView.frame = view.bounds
-//    }
 }
 
 // MARK: - Creating layout
@@ -61,10 +52,6 @@ extension DetailsViewController {
             switch section {
             case .info:
                 return self.createInfoSection()
-            case .links:
-                return self.createLinksSection()
-            case .video:
-                return self.createVideoSection()
             }
         }
         return layout
@@ -78,50 +65,16 @@ extension DetailsViewController {
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalWidth(0.5))
+                                               heightDimension: .fractionalWidth(1.5))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-                
+        
         let section = NSCollectionLayoutSection(group: group)
-    
+        
         section.interGroupSpacing = 5
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10)
-
+        
         let sectionHeader = createHeader()
         section.boundarySupplementaryItems = [sectionHeader]
-        
-        return section
-    }
-    
-    private func createLinksSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(88), heightDimension: .absolute(88))
-        
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 10)
-        section.orthogonalScrollingBehavior = .continuous
-        
-        return section
-    }
-    
-    private func createVideoSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(88), heightDimension: .absolute(88))
-        
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 10)
-        section.orthogonalScrollingBehavior = .continuous
         
         return section
     }
@@ -158,10 +111,6 @@ extension DetailsViewController {
                 }
                 cell.detailsLabel.text = info.details
                 return cell
-            case .links:
-                return nil
-            case .video:
-                return nil
             }
         }
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -178,9 +127,8 @@ extension DetailsViewController {
     private func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = Snapshot()
         
-        snapshot.appendSections([.info, .links, .video])
-        snapshot.appendItems([photo], toSection: .info)
-//        snapshot.appendItems([photo], toSection: .links)
+        snapshot.appendSections([.info])
+        snapshot.appendItems([info], toSection: .info)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import youtube_ios_player_helper
 
 class InfoCell: UICollectionViewCell {
     
@@ -20,8 +21,11 @@ class InfoCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = .sfPro20()
+        label.textAlignment = .justified
         return label
     }()
+    var videoView = UIView()
+    var playerView = YTPlayerView()
     
     var photo: Result! {
         didSet {
@@ -30,6 +34,9 @@ class InfoCell: UICollectionViewCell {
             let url = URL(string: imageUrl)
             else { return }
             patch.sd_setImage(with: url, completed: nil)
+            
+            guard let videoUrl = photo.links.webcast else { return }
+            playerView.load(withVideoId: videoUrl)
         }
     }
     
@@ -62,12 +69,16 @@ class InfoCell: UICollectionViewCell {
         rocketLabel.translatesAutoresizingMaskIntoConstraints = false
         successLabel.translatesAutoresizingMaskIntoConstraints = false
         detailsLabel.translatesAutoresizingMaskIntoConstraints = false
+        videoView.translatesAutoresizingMaskIntoConstraints = false
+        playerView.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(patch)
         addSubview(nameLabel)
         addSubview(rocketLabel)
         addSubview(successLabel)
         addSubview(detailsLabel)
+        addSubview(videoView)
+        videoView.addSubview(playerView)
         
         NSLayoutConstraint.activate([
             patch.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
@@ -98,6 +109,12 @@ class InfoCell: UICollectionViewCell {
             detailsLabel.topAnchor.constraint(equalTo: patch.bottomAnchor, constant: 5),
             detailsLabel.leadingAnchor.constraint(equalTo: patch.leadingAnchor),
             detailsLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5)
+        ])
+        
+        NSLayoutConstraint.activate([
+            videoView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 5),
+            videoView.leadingAnchor.constraint(equalTo: self.trailingAnchor, constant: 5),
+            videoView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 5)
         ])
     }
 }
