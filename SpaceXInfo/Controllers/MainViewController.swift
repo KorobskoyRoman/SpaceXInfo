@@ -160,7 +160,8 @@ extension MainViewController: UICollectionViewDelegate {
             let cell = collectionView.cellForItem(at: indexPath) as! NewsCell
             let detailsVC = DetailsViewController()
             let image = cell.image
-            detailsVC.photo = image
+            guard let image = image else { return }
+            detailsVC.info = image
 //            detailsVC.ytLink = launchInfo.links.webcast
 //            detailsVC.failures = launchInfo.failures
             navigationController?.pushViewController(detailsVC, animated: true)
