@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import youtube_ios_player_helper
+import YouTubePlayer
 
 class InfoCell: UICollectionViewCell {
     
@@ -24,8 +24,7 @@ class InfoCell: UICollectionViewCell {
         label.textAlignment = .justified
         return label
     }()
-    var videoView = UIView()
-    var playerView = YTPlayerView()
+    var playerView = YouTubePlayerView()
     
     var photo: Result! {
         didSet {
@@ -35,8 +34,9 @@ class InfoCell: UICollectionViewCell {
             else { return }
             patch.sd_setImage(with: url, completed: nil)
             
-            guard let videoUrl = photo.links.webcast else { return }
-            playerView.load(withVideoId: videoUrl)
+            guard let link = photo.links.webcast else { return }
+            guard let videoUrl = URL(string: link) else { return }
+            playerView.loadVideoURL(videoUrl)
         }
     }
     
@@ -44,6 +44,7 @@ class InfoCell: UICollectionViewCell {
         super.init(frame: frame)
         setConstraints()
         backgroundColor = .mainGray()
+        playerView.backgroundColor = .mainBlack()
         
         self.layer.shadowColor = UIColor.mainBlack().cgColor
         self.layer.shadowRadius = 3
@@ -59,6 +60,9 @@ class InfoCell: UICollectionViewCell {
         super.layoutSubviews()
         self.layer.cornerRadius = 10
         self.patch.clipsToBounds = true
+        
+        self.playerView.layer.cornerRadius = 10
+        self.playerView.clipsToBounds = true
     }
     
     private func setConstraints() {
@@ -69,16 +73,16 @@ class InfoCell: UICollectionViewCell {
         rocketLabel.translatesAutoresizingMaskIntoConstraints = false
         successLabel.translatesAutoresizingMaskIntoConstraints = false
         detailsLabel.translatesAutoresizingMaskIntoConstraints = false
-        videoView.translatesAutoresizingMaskIntoConstraints = false
         playerView.translatesAutoresizingMaskIntoConstraints = false
+        playerView.clipsToBounds = true
+        playerView.contentMode = .scaleAspectFill
         
         addSubview(patch)
         addSubview(nameLabel)
         addSubview(rocketLabel)
         addSubview(successLabel)
         addSubview(detailsLabel)
-        addSubview(videoView)
-        videoView.addSubview(playerView)
+        self.addSubview(playerView)
         
         NSLayoutConstraint.activate([
             patch.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
@@ -112,9 +116,10 @@ class InfoCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            videoView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 5),
-            videoView.leadingAnchor.constraint(equalTo: self.trailingAnchor, constant: 5),
-            videoView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 5)
+            playerView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 5),
+            playerView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+            playerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
+            playerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
         ])
     }
 }
