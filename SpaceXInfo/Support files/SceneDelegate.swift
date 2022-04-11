@@ -20,6 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         let navController = UINavigationController(rootViewController: MainViewController())
+        navController.navigationBar.barTintColor = .mainBlue()
+        navController.navigationBar.tintColor = .mainWhite()
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
     }

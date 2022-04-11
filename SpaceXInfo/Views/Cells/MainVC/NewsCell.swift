@@ -21,9 +21,16 @@ class NewsCell: UICollectionViewCell {
         let date = dateFormatter.date(from: label.text ?? "")
         let dateSring = dateFormatter.string(from: date ?? Date())
         label.text = dateSring
+        label.textColor = .mainWhite()
+        label.font = .sfPro16()
         return label
     }()
-    var nameLabel = UILabel()
+    var nameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .mainWhite()
+        label.font = .sfPro20()
+        return label
+    }()
     var successLabel = UILabel()
     
     override func prepareForReuse() {
@@ -51,7 +58,7 @@ class NewsCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
-        backgroundColor = .mainWhite()
+        backgroundColor = .secondaryBlue()
         
         self.layer.shadowColor = UIColor.mainBlack().cgColor
         self.layer.shadowRadius = 3

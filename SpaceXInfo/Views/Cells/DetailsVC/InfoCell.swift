@@ -14,11 +14,27 @@ class InfoCell: UICollectionViewCell {
     static var reuseId = "reuseId"
     
     var patch = UIImageView()
-    var nameLabel = UILabel()
-    var rocketLabel = UILabel()
-    var successLabel = UILabel()
+    var nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .sfPro20()
+        label.textColor = .mainWhite()
+        return label
+    }()
+    var rocketLabel: UILabel = {
+        let label = UILabel()
+        label.font = .sfPro20()
+        label.textColor = .mainWhite()
+        return label
+    }()
+    var successLabel: UILabel = {
+        let label = UILabel()
+        label.font = .sfPro20()
+        label.textColor = .mainWhite()
+        return label
+    }()
     var detailsLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .mainWhite()
         label.numberOfLines = 0
         label.font = .sfPro20()
         label.textAlignment = .justified
@@ -43,7 +59,7 @@ class InfoCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
-        backgroundColor = .mainGray()
+        backgroundColor = .secondaryBlue()
         playerView.backgroundColor = .mainBlack()
         
         self.layer.shadowColor = UIColor.mainBlack().cgColor

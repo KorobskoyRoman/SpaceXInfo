@@ -11,6 +11,7 @@ import UIKit
 extension UIView {
     static let loadingViewTag = 1938123987
     static let labelInfoTag = 1938123988
+    
     func showLoading(style: UIActivityIndicatorView.Style = .large, color: UIColor? = nil) {
         DispatchQueue.main.async {
             var loading = self.viewWithTag(UIImageView.loadingViewTag) as? UIActivityIndicatorView
@@ -21,7 +22,7 @@ extension UIView {
             let infoLabel: UILabel = {
                 let label = UILabel()
                 label.text = "Loading data..."
-                label.font = UIFont(name: "SF Compact", size: 16)
+                label.font = .sfPro20()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 return label
             }()

@@ -19,14 +19,14 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mainWhite()
+        view.backgroundColor = .mainBlue()
         setupCollectionView()
         applySnapshot()
         fetchData()
     }
     
     private func fetchData() {
-        self.collectionView.showLoading(style: .large, color: .mainRed())
+        self.collectionView.showLoading(style: .large, color: .mainWhite())
         self.networkManager.fetchLaunches { result in
             if result != [Result]() {
                 self.launches = result
@@ -44,9 +44,8 @@ class MainViewController: UIViewController {
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositialLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleWidth]
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .mainBlue()
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .mainWhite()
         collectionView.allowsMultipleSelection = true
         title = "SpaceX launches"
         
