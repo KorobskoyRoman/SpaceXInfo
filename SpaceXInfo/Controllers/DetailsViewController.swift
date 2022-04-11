@@ -34,6 +34,8 @@ class DetailsViewController: UIViewController {
         collectionView.backgroundColor = .mainWhite()
         collectionView.allowsMultipleSelection = true
         title = "SpaceX info"
+        collectionView.backgroundColor = .mainBlue()
+        collectionView.isScrollEnabled = false
         collectionView.register(InfoCell.self, forCellWithReuseIdentifier: InfoCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
     }
