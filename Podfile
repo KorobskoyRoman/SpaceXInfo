@@ -8,5 +8,6 @@ target 'SpaceXInfo' do
   # Pods for SpaceXInfo
 pod 'SDWebImage'
 pod 'YouTubePlayer'
+pod 'ReachabilitySwift'
 
 end
