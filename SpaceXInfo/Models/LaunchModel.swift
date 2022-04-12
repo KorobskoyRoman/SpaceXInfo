@@ -35,26 +35,12 @@ struct Result: Codable, Hashable {
     }
 }
 
-struct Links: Codable, Hashable {
+struct Links: Codable {
     
-    let uuid = UUID()
     let patch: Patch
     let webcast: String?
     let article: String?
-    
-    static func == (lhs: Links, rhs: Links) -> Bool {
-        lhs.uuid == rhs.uuid
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(uuid)
-    }
 }
-
-//struct Failure: Codable {
-//    let time: Int
-//    let reason: String
-//}
 
 struct Patch: Codable {
     let small: String?
