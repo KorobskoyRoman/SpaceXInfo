@@ -13,5 +13,5 @@ func showAlert(title: String, message: String, controller: UIViewController) {
     let okAction = UIAlertAction(title: "OK", style: .default)
     
     alert.addAction(okAction)
-    alert.present(controller, animated: true, completion: nil)
+    controller.present(alert, animated: true, completion: nil)
 }

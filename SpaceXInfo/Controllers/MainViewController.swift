@@ -17,27 +17,85 @@ class MainViewController: UIViewController {
     private var launches = [Result]()
     private let networkManager = NetworkManager()
     
+    lazy private var loadingErrorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Oops it's seems like you're is currently offline!"
+        label.textColor = .mainWhite()
+        label.textAlignment = .center
+        label.font = .sfPro20()
+        return label
+    }()
+    lazy private var noWifiImage: UIImageView = {
+        var image = UIImageView()
+        image.image = UIImage(systemName: "wifi.slash")
+        image.image?.withTintColor(.mainWhite())
+        image.tintColor = .mainWhite()
+        return image
+    }()
+    private lazy var reloadButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .secondaryBlue()
+        button.setTitleColor(.black, for: .normal)
+        button.setTitle("Reload data", for: .normal)
+        button.layer.cornerRadius = 10
+        button.setTitleColor(.mainWhite(), for: .normal)
+        button.layer.shadowColor = UIColor.mainBlack().cgColor
+        button.layer.shadowRadius = 3
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+//        button.applyGradients(cornerRadius: 10)
+        button.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    let reachability = try! Reachability()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .mainBlue()
         setupCollectionView()
         applySnapshot()
+        setConstraints()
         fetchData()
     }
     
     private func fetchData() {
-        self.collectionView.showLoading(style: .large, color: .mainWhite())
-        self.networkManager.fetchLaunches { result in
-            if result != [Result]() {
-                self.launches = result
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.applySnapshot()
-                    self.collectionView.stopLoading()
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .cellular || reachability.connection == .wifi {
+                self.collectionView.showLoading(style: .large, color: .mainWhite())
+                self.networkManager.fetchLaunches { [weak self] result in
+                    if result != [Result]() {
+                        self?.launches = result
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self?.applySnapshot()
+                            self?.collectionView.stopLoading()
+                            self?.hideErrorContent()
+                        }
+                    } else {
+                        showAlert(title: "Error",
+                                  message: "No internet! \nCheck your wi-fi settings or reload application",
+                                  controller: self ?? MainViewController())
+                        self?.collectionView.stopLoading()
+                        self?.showErrorContent()
+                    }
                 }
             } else {
-                showAlert(title: "Error", message: "No internet", controller: self)
-                self.collectionView.stopLoading()
+                showAlert(title: "Error",
+                          message: "No internet! \nCheck your wi-fi settings or reload application",
+                          controller: self)
             }
+        }
+        reachability.whenUnreachable = { [weak self] _ in
+            showAlert(title: "Error",
+                      message: "No internet! \nCheck your wi-fi settings or reload application",
+                      controller: self ?? MainViewController())
+            self?.collectionView.stopLoading()
+            self?.showErrorContent()
+        }
+        do {
+            try reachability.startNotifier()
+        } catch let error as NSError {
+            print(error.localizedDescription)
         }
     }
     
@@ -52,6 +110,26 @@ class MainViewController: UIViewController {
         collectionView.register(NewsCell.self, forCellWithReuseIdentifier: NewsCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
         collectionView.delegate = self
+    }
+    
+    private func showErrorContent() {
+        collectionView.isScrollEnabled = false
+        loadingErrorLabel.isHidden = false
+        noWifiImage.isHidden = false
+        reloadButton.isHidden = false
+    }
+    
+    private func hideErrorContent() {
+        collectionView.isScrollEnabled = true
+        loadingErrorLabel.isHidden = true
+        noWifiImage.isHidden = true
+        reloadButton.isHidden = true
+    }
+    
+    @objc private func reloadButtonTapped() {
+        DispatchQueue.main.async {
+            self.fetchData()
+        }
     }
 }
 
@@ -152,7 +230,6 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let launchInfo = dataSource.itemIdentifier(for: indexPath) else { return }
-//        print(launchInfo.name)
         guard let section = Section(rawValue: indexPath.section) else { fatalError("No section") }
         switch section {
         case .mainSection:
@@ -161,9 +238,41 @@ extension MainViewController: UICollectionViewDelegate {
             let image = cell.image
             guard let image = image else { return }
             detailsVC.info = image
-//            detailsVC.ytLink = launchInfo.links.webcast
-//            detailsVC.failures = launchInfo.failures
             navigationController?.pushViewController(detailsVC, animated: true)
         }
+    }
+}
+
+extension MainViewController {
+    private func setConstraints() {
+        collectionView.addSubview(loadingErrorLabel)
+        collectionView.addSubview(noWifiImage)
+        collectionView.addSubview(reloadButton)
+        loadingErrorLabel.translatesAutoresizingMaskIntoConstraints = false
+        noWifiImage.translatesAutoresizingMaskIntoConstraints = false
+        reloadButton.translatesAutoresizingMaskIntoConstraints = false
+        loadingErrorLabel.isHidden = true
+        noWifiImage.isHidden = true
+        reloadButton.isHidden = true
+        
+        NSLayoutConstraint.activate([
+            loadingErrorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingErrorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            noWifiImage.topAnchor.constraint(equalTo: loadingErrorLabel.bottomAnchor, constant: 10),
+            noWifiImage.leadingAnchor.constraint(equalTo: loadingErrorLabel.leadingAnchor),
+            noWifiImage.trailingAnchor.constraint(equalTo: loadingErrorLabel.trailingAnchor),
+            noWifiImage.heightAnchor.constraint(equalToConstant: 250),
+            noWifiImage.widthAnchor.constraint(equalTo: loadingErrorLabel.widthAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            reloadButton.topAnchor.constraint(equalTo: noWifiImage.bottomAnchor, constant: 10),
+            reloadButton.widthAnchor.constraint(equalToConstant: 150),
+            reloadButton.heightAnchor.constraint(equalToConstant: 40),
+            reloadButton.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor)
+        ])
     }
 }
