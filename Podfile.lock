@@ -1,22 +1,32 @@
 PODS:
+  - Realm (10.25.1):
+    - Realm/Headers (= 10.25.1)
+  - Realm/Headers (10.25.1)
+  - RealmSwift (10.25.1):
+    - Realm (= 10.25.1)
   - SDWebImage (5.12.2):
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
   - YouTubePlayer (0.7.2)
 
 DEPENDENCIES:
+  - RealmSwift (~> 10)
   - SDWebImage
   - YouTubePlayer
 
 SPEC REPOS:
   trunk:
+    - Realm
+    - RealmSwift
     - SDWebImage
     - YouTubePlayer
 
 SPEC CHECKSUMS:
+  Realm: 1a6e9b4f6983711655d8c0bcb6d2d29c3afbb1f3
+  RealmSwift: e72669550d27082aa4fad5d176f5076cfe806245
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: abd5d3598da2c0ed8599e2f6c8ca24849bcb63cb
+PODFILE CHECKSUM: 11d8c9ea1dd9634191d2f0cc0ea27c8c20b9bc29
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
