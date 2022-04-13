@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SDWebImage
+import RealmSwift
 
 class NewsCell: UICollectionViewCell {
     
@@ -55,6 +56,8 @@ class NewsCell: UICollectionViewCell {
             imagePhoto.sd_setImage(with: url, completed: nil)
         }
     }
+    let realm = try! Realm()
+    var cell: RealmModel?
     
     override func layoutSubviews() { //округляем всю ячейку
         super.layoutSubviews()
@@ -72,15 +75,36 @@ class NewsCell: UICollectionViewCell {
         self.layer.shadowOffset = CGSize(width: 0, height: 4)
         
         addFavorite.addTarget(self, action: #selector(addFavoriteTapped(_:)), for: .touchUpInside)
+        
+        checkLaunch()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func addFavoriteTapped(_ sender: Any) {
+    private func checkLaunch() {
+        let likes = RealmManager.shared.liked
+        let launchModel = RealmModel()
+        if likes.contains(launchModel) {
+            addFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+    }
+    var likes1 = [Result]()
+    @objc func addFavoriteTapped(_ sender: Any) {
         print("tapped")
         addFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        guard let cell = image else { return }
+        let launchModel = RealmModel()
+        launchModel.name = cell.name ?? ""
+        launchModel.rocket = cell.rocket ?? ""
+        launchModel.link = cell.links.patch.small ?? ""
+        launchModel.success = cell.success ?? false
+        launchModel.details = cell.details ?? ""
+        launchModel.date = cell.dateUTC ?? ""
+        RealmManager.shared.saveLaunch(launch: launchModel)
+        
+//        checkLaunch()
     }
     
     private func setConstraints() {
