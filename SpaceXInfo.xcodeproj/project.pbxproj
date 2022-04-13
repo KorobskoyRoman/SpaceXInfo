@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCBDD4C2807614F00F7E214 /* RealmModel.swift */; };
 		9CFC776127F7564200E50FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776027F7564200E50FCA /* AppDelegate.swift */; };
 		9CFC776327F7564200E50FCA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776227F7564200E50FCA /* SceneDelegate.swift */; };
 		9CFC776527F7564200E50FCA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776427F7564200E50FCA /* MainViewController.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		4ECA929C234960E298E78B8D /* Pods-SpaceXInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXInfo.debug.xcconfig"; path = "Target Support Files/Pods-SpaceXInfo/Pods-SpaceXInfo.debug.xcconfig"; sourceTree = "<group>"; };
 		6FA7262CE89D686DA69D0365 /* Pods-SpaceXInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXInfo.release.xcconfig"; path = "Target Support Files/Pods-SpaceXInfo/Pods-SpaceXInfo.release.xcconfig"; sourceTree = "<group>"; };
+		9CCBDD4C2807614F00F7E214 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		9CFC775D27F7564200E50FCA /* SpaceXInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceXInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CFC776027F7564200E50FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CFC776227F7564200E50FCA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				9CFC777727F75A5800E50FCA /* Section.swift */,
 				9CFC778D27FE0F7600E50FCA /* DetailsSections.swift */,
 				9CFC778127F76B7700E50FCA /* LaunchModel.swift */,
+				9CCBDD4C2807614F00F7E214 /* RealmModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				9CFC777E27F7669B00E50FCA /* SectionHeader.swift in Sources */,
 				9CFC776127F7564200E50FCA /* AppDelegate.swift in Sources */,
 				9CFC776327F7564200E50FCA /* SceneDelegate.swift in Sources */,
+				9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */,
 				9CFC777B27F7636D00E50FCA /* NewsCell.swift in Sources */,
 				9CFC778C27FDF88C00E50FCA /* DetailsViewController.swift in Sources */,
 				9CFEF6372805CA9300DF5F79 /* Reachability.swift in Sources */,
