@@ -36,4 +36,8 @@ extension UIColor {
     static func secondaryBlue() -> UIColor {
         return #colorLiteral(red: 0.4030927718, green: 0.385201335, blue: 1, alpha: 1)
     }
+    
+    static func blueShadow() -> UIColor {
+        return #colorLiteral(red: 0.1770806611, green: 0.1718432307, blue: 0.452688992, alpha: 1)
+    }
 }

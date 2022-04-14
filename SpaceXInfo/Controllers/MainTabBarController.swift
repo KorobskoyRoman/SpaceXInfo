@@ -19,7 +19,7 @@ class MainTabBarController: UITabBarController {
         let libraryVC = LibraryViewController()
         
         let boldConfig = UIImage.SymbolConfiguration(weight: .medium)
-        let launchImage = UIImage(systemName: "photo.artframe", withConfiguration: boldConfig)
+        let launchImage = UIImage(systemName: "lasso.and.sparkles", withConfiguration: boldConfig)
         let libraryImage = UIImage(systemName: "square.and.arrow.down.on.square", withConfiguration: boldConfig)
         
         viewControllers = [generateNavigationController(rootViewController: mainVC, title: "Launches", image: launchImage!),
