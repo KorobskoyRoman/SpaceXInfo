@@ -126,7 +126,7 @@ extension DetailsViewController {
     
     private func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = Snapshot()
-        
+        guard let info = info else { return }
         snapshot.appendSections([.info])
         snapshot.appendItems([info], toSection: .info)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)

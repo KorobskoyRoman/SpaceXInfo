@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		9CBA1361280767B100F77CDC /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA1360280767B100F77CDC /* RealmManager.swift */; };
+		9CBA13632808646800F77CDC /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA13622808646800F77CDC /* MainTabBarController.swift */; };
+		9CBA1365280865F900F77CDC /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA1364280865F900F77CDC /* LibraryViewController.swift */; };
+		9CBA13682808B31600F77CDC /* LibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA13672808B31600F77CDC /* LibraryCell.swift */; };
+		9CBA136B2808B3B500F77CDC /* LibrarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA136A2808B3B500F77CDC /* LibrarySection.swift */; };
 		9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCBDD4C2807614F00F7E214 /* RealmModel.swift */; };
 		9CFC776127F7564200E50FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776027F7564200E50FCA /* AppDelegate.swift */; };
 		9CFC776327F7564200E50FCA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776227F7564200E50FCA /* SceneDelegate.swift */; };
@@ -35,6 +39,10 @@
 		4ECA929C234960E298E78B8D /* Pods-SpaceXInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXInfo.debug.xcconfig"; path = "Target Support Files/Pods-SpaceXInfo/Pods-SpaceXInfo.debug.xcconfig"; sourceTree = "<group>"; };
 		6FA7262CE89D686DA69D0365 /* Pods-SpaceXInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXInfo.release.xcconfig"; path = "Target Support Files/Pods-SpaceXInfo/Pods-SpaceXInfo.release.xcconfig"; sourceTree = "<group>"; };
 		9CBA1360280767B100F77CDC /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		9CBA13622808646800F77CDC /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		9CBA1364280865F900F77CDC /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		9CBA13672808B31600F77CDC /* LibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCell.swift; sourceTree = "<group>"; };
+		9CBA136A2808B3B500F77CDC /* LibrarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySection.swift; sourceTree = "<group>"; };
 		9CCBDD4C2807614F00F7E214 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		9CFC775D27F7564200E50FCA /* SpaceXInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceXInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CFC776027F7564200E50FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +87,24 @@
 				6FA7262CE89D686DA69D0365 /* Pods-SpaceXInfo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9CBA13662808B30400F77CDC /* LibraryVC */ = {
+			isa = PBXGroup;
+			children = (
+				9CBA13672808B31600F77CDC /* LibraryCell.swift */,
+			);
+			path = LibraryVC;
+			sourceTree = "<group>";
+		};
+		9CBA13692808B36D00F77CDC /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				9CFC777727F75A5800E50FCA /* Section.swift */,
+				9CFC778D27FE0F7600E50FCA /* DetailsSections.swift */,
+				9CBA136A2808B3B500F77CDC /* LibrarySection.swift */,
+			);
+			name = Sections;
 			sourceTree = "<group>";
 		};
 		9CFC775427F7564200E50FCA = {
@@ -127,8 +153,10 @@
 		9CFC777527F75A1D00E50FCA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9CBA13622808646800F77CDC /* MainTabBarController.swift */,
 				9CFC776427F7564200E50FCA /* MainViewController.swift */,
 				9CFC778B27FDF88C00E50FCA /* DetailsViewController.swift */,
+				9CBA1364280865F900F77CDC /* LibraryViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -136,8 +164,7 @@
 		9CFC777627F75A2500E50FCA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9CFC777727F75A5800E50FCA /* Section.swift */,
-				9CFC778D27FE0F7600E50FCA /* DetailsSections.swift */,
+				9CBA13692808B36D00F77CDC /* Sections */,
 				9CFC778127F76B7700E50FCA /* LaunchModel.swift */,
 				9CCBDD4C2807614F00F7E214 /* RealmModel.swift */,
 			);
@@ -179,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				9CFC777927F7635D00E50FCA /* Cells */,
+				9CBA13662808B30400F77CDC /* LibraryVC */,
 				9CFC778727FCB01200E50FCA /* ShowAlert.swift */,
 			);
 			path = Views;
@@ -323,8 +351,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CFC779427FE273A00E50FCA /* UIFont + Extension.swift in Sources */,
+				9CBA13682808B31600F77CDC /* LibraryCell.swift in Sources */,
 				9CFC778527F77A7600E50FCA /* NetworkManager.swift in Sources */,
+				9CBA13632808646800F77CDC /* MainTabBarController.swift in Sources */,
 				9CFC778227F76B7700E50FCA /* LaunchModel.swift in Sources */,
+				9CBA1365280865F900F77CDC /* LibraryViewController.swift in Sources */,
+				9CBA136B2808B3B500F77CDC /* LibrarySection.swift in Sources */,
 				9CFC778027F767AD00E50FCA /* UIColor + Extension.swift in Sources */,
 				9CFC776527F7564200E50FCA /* MainViewController.swift in Sources */,
 				9CFEF6392805FB4F00DF5F79 /* GradientView.swift in Sources */,
