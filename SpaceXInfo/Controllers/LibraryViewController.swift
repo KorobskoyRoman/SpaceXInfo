@@ -17,6 +17,7 @@ class LibraryViewController: UIViewController {
     private let realm = try! Realm()
     private var collectionView: UICollectionView!
     private lazy var dataSource = createDiffableDataSource()
+    private let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,13 +25,13 @@ class LibraryViewController: UIViewController {
         view.backgroundColor = .mainBlue()
         setupCollectionView()
         loadLaunches()
+        configurateSearchController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadLaunches()
         applySnapshot()
-        print(likes ?? [])
     }
     
     private func loadLaunches() {
@@ -98,8 +99,10 @@ extension LibraryViewController {
             }
         }
             dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseId, for: indexPath) as? SectionHeader else { fatalError("can't create header") }
-                guard let section = LibrarySection(rawValue: indexPath.section) else { fatalError("can't create section") }
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                                          withReuseIdentifier: SectionHeader.reuseId,
+                                                                                          for: indexPath) as? SectionHeader
+                else { fatalError("can't create header") }
                 sectionHeader.configurate(text: "", font: .sfPro16(), textColor: .mainGray())
                 return sectionHeader
             }
@@ -119,6 +122,35 @@ extension LibraryViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(likes.toArray(), toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+}
+
+extension LibraryViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        likes = filteredItems(for: searchController.searchBar.text)
+        applySnapshot()
+        loadLaunches()
+    }
+    
+    func filteredItems(for query: String?) -> Results<RealmModel> {
+        guard let query = query, !query.isEmpty else {
+            return likes
+        }
+        return likes.where { $0.name.contains(query) }
+    }
+    
+    private func configurateSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search favorites"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.tintColor = .mainWhite()
+        searchController.searchBar.searchTextField.textColor = .mainWhite()
+        searchController.searchBar.searchTextField.backgroundColor = .secondaryBlue()
     }
 }
 

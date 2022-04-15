@@ -229,7 +229,6 @@ extension MainViewController {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let launchInfo = dataSource.itemIdentifier(for: indexPath) else { return }
         guard let section = Section(rawValue: indexPath.section) else { fatalError("No section") }
         switch section {
         case .mainSection:
