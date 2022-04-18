@@ -19,8 +19,18 @@ class RealmManager {
         do {
             try localRealm.write({
                 localRealm.add(launch)
-                liked.append(launch)
-                print(launch)
+//                liked.append(launch)
+//                print(launch)
+            })
+        } catch {
+            print(error)
+        }
+    }
+    
+    func deleteLaunch(launch: RealmModel) {
+        do {
+            try localRealm.write({
+                localRealm.delete(localRealm.objects(RealmModel.self).filter("name=%@"))
             })
         } catch {
             print(error)

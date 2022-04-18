@@ -18,6 +18,9 @@ class LibraryViewController: UIViewController {
     private var collectionView: UICollectionView!
     private lazy var dataSource = createDiffableDataSource()
     private let searchController = UISearchController(searchResultsController: nil)
+    private lazy var deleteAllButton: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAllButtonTapped))
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,7 @@ class LibraryViewController: UIViewController {
         super.viewWillAppear(animated)
         loadLaunches()
         applySnapshot()
+        print(likes.count)
     }
     
     private func loadLaunches() {
@@ -49,6 +53,11 @@ class LibraryViewController: UIViewController {
         collectionView.register(LibraryCell.self, forCellWithReuseIdentifier: LibraryCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
         collectionView.delegate = self
+    }
+    
+    @objc private func deleteAllButtonTapped(_ sender: UIBarButtonItem) {
+        realm.deleteAll()
+        applySnapshot()
     }
 }
 
@@ -98,16 +107,16 @@ extension LibraryViewController {
                 return cell
             }
         }
-            dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                                          withReuseIdentifier: SectionHeader.reuseId,
-                                                                                          for: indexPath) as? SectionHeader
-                else { fatalError("can't create header") }
-                sectionHeader.configurate(text: "", font: .sfPro16(), textColor: .mainGray())
-                return sectionHeader
-            }
-            return dataSource
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                                      withReuseIdentifier: SectionHeader.reuseId,
+                                                                                      for: indexPath) as? SectionHeader
+            else { fatalError("can't create header") }
+            sectionHeader.configurate(text: "", font: .sfPro16(), textColor: .mainGray())
+            return sectionHeader
         }
+        return dataSource
+    }
     
     private func createHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))

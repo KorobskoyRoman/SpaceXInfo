@@ -70,6 +70,7 @@ class NewsCell: UICollectionViewCell {
     }
     let realm = try! Realm()
     var cell: RealmModel?
+    var isLiked: Bool = false
     
     override func layoutSubviews() { //округляем всю ячейку
         super.layoutSubviews()
@@ -88,7 +89,7 @@ class NewsCell: UICollectionViewCell {
         
         addFavorite.addTarget(self, action: #selector(addFavoriteTapped(_:)), for: .touchUpInside)
         
-        checkLaunch()
+//        checkLaunch()
     }
     
     required init?(coder: NSCoder) {
@@ -96,12 +97,12 @@ class NewsCell: UICollectionViewCell {
     }
     
     private func checkLaunch() {
-        let likes = RealmManager.shared.liked
+//        let likes = RealmManager.shared.liked
         let launchModel = RealmModel()
-        if likes.contains(launchModel) {
+//        if isLiked == true {
             addFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            print("LIKED PHOTOS: \(likes) ------------------------------")
-        }
+            RealmManager.shared.deleteLaunch(launch: launchModel)
+//        }
     }
     
     @objc func addFavoriteTapped(_ sender: Any) {
@@ -116,7 +117,11 @@ class NewsCell: UICollectionViewCell {
         launchModel.date = cell.dateUTC ?? ""
         RealmManager.shared.saveLaunch(launch: launchModel)
         RealmManager.shared.liked.append(launchModel)
-        checkLaunch()
+        
+        if isLiked == true {
+            checkLaunch()
+        }
+        isLiked = true
     }
     
     private func setConstraints() {
