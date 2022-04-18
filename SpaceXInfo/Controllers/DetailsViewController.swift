@@ -16,14 +16,22 @@ class DetailsViewController: UIViewController {
     
     private var collectionView: UICollectionView!
     private lazy var dataSource = createDiffableDataSource()
+    private lazy var marsImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "mars")
+        return imageView
+    }()
 
     var info: Result!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.inputViewController?.hidesBottomBarWhenPushed = true
         
         setupCollectionView()
         applySnapshot()
+        setConstraints()
     }
     
     private func setupCollectionView() {
@@ -119,5 +127,20 @@ extension DetailsViewController {
         snapshot.appendSections([.info])
         snapshot.appendItems([info], toSection: .info)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+}
+
+extension DetailsViewController {
+    private func setConstraints() {
+        marsImage.contentMode = .scaleAspectFit
+        marsImage.clipsToBounds = true
+        view.addSubview(marsImage)
+        
+        NSLayoutConstraint.activate([
+            marsImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            marsImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            marsImage.widthAnchor.constraint(equalToConstant: 150),
+            marsImage.heightAnchor.constraint(equalToConstant: 150)
+        ])
     }
 }

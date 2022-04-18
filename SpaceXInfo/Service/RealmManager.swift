@@ -28,9 +28,10 @@ class RealmManager {
     }
     
     func deleteLaunch(launch: RealmModel) {
+        let predicate = NSPredicate(format: "name=%@", launch.name)
         do {
             try localRealm.write({
-                localRealm.delete(localRealm.objects(RealmModel.self).filter("name=%@"))
+                localRealm.delete(localRealm.objects(RealmModel.self).filter(predicate))
             })
         } catch {
             print(error)
