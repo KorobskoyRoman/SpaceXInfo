@@ -98,18 +98,7 @@ extension DetailsViewController {
             switch section {
             case .info:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoCell.reuseId, for: indexPath) as! InfoCell
-                cell.photo = info
-                cell.nameLabel.text = "🌙 \(info.name ?? "no data")"
-                cell.rocketLabel.text = "🚀 id: \(info.rocket ?? "no data")"
-                cell.successLabel.text = "\(info.success ?? false)"
-                if cell.successLabel.text == "false" {
-                    cell.successLabel.text = "❌ Launch failed"
-                    cell.successLabel.textColor = .mainRed()
-                } else if cell.successLabel.text == "true" {
-                    cell.successLabel.text = "✅ Launch successed"
-                    cell.successLabel.textColor = .mainGreen()
-                }
-                cell.detailsLabel.text = info.details
+                cell.info = info
                 return cell
             }
         }

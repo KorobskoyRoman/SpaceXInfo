@@ -181,22 +181,7 @@ extension MainViewController {
             switch section {
             case .mainSection:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCell.reuseId, for: indexPath) as! NewsCell
-                cell.image = info
-//                cell.dateLabel.text = "Start date: \(info.dateUTC ?? "no data")"
-                // << костыль с датой
-                let date = info.dateUTC?.firstIndex(of: "T")
-                let updatedDate = info.dateUTC![..<date!]
-                cell.dateLabel.text = "Start date: \(updatedDate)"
-                // >>
-                cell.nameLabel.text = "\(info.name ?? "no data")"
-                cell.successLabel.text = "\(info.success ?? false)"
-                if cell.successLabel.text == "false" {
-                    cell.successLabel.text = "Launch failed"
-                    cell.successLabel.textColor = .mainRed()
-                } else if cell.successLabel.text == "true" {
-                    cell.successLabel.text = "Launch successed"
-                    cell.successLabel.textColor = .mainGreen()
-                }
+                cell.info = info
                 return cell
             }
         }
@@ -234,7 +219,7 @@ extension MainViewController: UICollectionViewDelegate {
         case .mainSection:
             let cell = collectionView.cellForItem(at: indexPath) as! NewsCell
             let detailsVC = DetailsViewController()
-            let image = cell.image
+            let image = cell.info
             guard let image = image else { return }
             detailsVC.info = image
             navigationController?.pushViewController(detailsVC, animated: true)
