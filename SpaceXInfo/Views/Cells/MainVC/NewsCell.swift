@@ -45,15 +45,27 @@ class NewsCell: UICollectionViewCell {
         imagePhoto.image = nil
     }
     
-    var image: Result! {
+    var info: Result! {
         didSet {
-            let imageUrl = image.links.patch.small
+            let imageUrl = info.links.patch.small
             guard let imageUrl = imageUrl,
-            let url = URL(string: imageUrl)
+                  let url = URL(string: imageUrl)
             else {
                 return
             }
             imagePhoto.sd_setImage(with: url, completed: nil)
+            let date = info.dateUTC?.firstIndex(of: "T")
+            let updatedDate = info.dateUTC![..<date!]
+            dateLabel.text = "Start date: \(updatedDate)"
+            nameLabel.text = "\(info.name ?? "no data")"
+            successLabel.text = "\(info.success ?? false)"
+            if successLabel.text == "false" {
+                successLabel.text = "Launch failed"
+                successLabel.textColor = .mainRed()
+            } else if successLabel.text == "true" {
+                successLabel.text = "Launch successed"
+                successLabel.textColor = .mainGreen()
+            }
         }
     }
     let realm = try! Realm()
@@ -88,13 +100,13 @@ class NewsCell: UICollectionViewCell {
         let launchModel = RealmModel()
         if likes.contains(launchModel) {
             addFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            print("LIKED PHOTOS: \(likes) ------------------------------")
         }
     }
     
     @objc func addFavoriteTapped(_ sender: Any) {
-        print("tapped")
         addFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        guard let cell = image else { return }
+        guard let cell = info else { return }
         let launchModel = RealmModel()
         launchModel.name = cell.name ?? ""
         launchModel.rocket = cell.rocket ?? ""
@@ -103,8 +115,8 @@ class NewsCell: UICollectionViewCell {
         launchModel.details = cell.details ?? ""
         launchModel.date = cell.dateUTC ?? ""
         RealmManager.shared.saveLaunch(launch: launchModel)
-        
-//        checkLaunch()
+        RealmManager.shared.liked.append(launchModel)
+        checkLaunch()
     }
     
     private func setConstraints() {

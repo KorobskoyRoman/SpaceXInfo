@@ -174,8 +174,8 @@
 		9CFC777927F7635D00E50FCA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				9CFC778F27FE154400E50FCA /* DetailsVC */,
 				9CFC779227FE1D9A00E50FCA /* MainVC */,
+				9CFC778F27FE154400E50FCA /* DetailsVC */,
 			);
 			path = Cells;
 			sourceTree = "<group>";

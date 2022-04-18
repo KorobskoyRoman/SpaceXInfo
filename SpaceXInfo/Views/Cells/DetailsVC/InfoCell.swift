@@ -42,17 +42,29 @@ class InfoCell: UICollectionViewCell {
     }()
     var playerView = YouTubePlayerView()
     
-    var photo: Result! {
+    var info: Result! {
         didSet {
-            let imageUrl = photo.links.patch.small
+            let imageUrl = info.links.patch.small
             guard let imageUrl = imageUrl,
-            let url = URL(string: imageUrl)
+                  let url = URL(string: imageUrl)
             else { return }
             patch.sd_setImage(with: url, completed: nil)
             
-            guard let link = photo.links.webcast else { return }
+            guard let link = info.links.webcast else { return }
             guard let videoUrl = URL(string: link) else { return }
             playerView.loadVideoURL(videoUrl)
+            
+            nameLabel.text = "🌙 \(info.name ?? "no data")"
+            rocketLabel.text = "🚀 id: \(info.rocket ?? "no data")"
+            successLabel.text = "\(info.success ?? false)"
+            if successLabel.text == "false" {
+                successLabel.text = "❌ Launch failed"
+                successLabel.textColor = .mainRed()
+            } else if successLabel.text == "true" {
+                successLabel.text = "✅ Launch successed"
+                successLabel.textColor = .mainGreen()
+            }
+            detailsLabel.text = info.details
         }
     }
     
