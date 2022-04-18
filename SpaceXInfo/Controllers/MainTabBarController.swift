@@ -28,7 +28,7 @@ class MainTabBarController: UITabBarController {
     
     private func generateNavigationController(rootViewController: UIViewController, title: String, image: UIImage) -> UIViewController {
         let navigationVC = UINavigationController(rootViewController: rootViewController)
-        navigationVC.navigationBar.barTintColor = .mainBlue()
+        navigationVC.navigationBar.barTintColor = .secondaryBlue()
         navigationVC.navigationBar.tintColor = .mainWhite()
         navigationVC.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.mainWhite()]
         navigationVC.tabBarItem.title = title

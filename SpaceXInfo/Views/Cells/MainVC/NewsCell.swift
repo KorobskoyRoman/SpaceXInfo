@@ -34,9 +34,10 @@ class NewsCell: UICollectionViewCell {
     }()
     var successLabel = UILabel()
     var addFavorite: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
-        button.imageView?.tintColor = .mainRed()
+        let button = HeartButton()
+        //        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        //        button.imageView?.tintColor = .mainRed()
+        button.tintColor = .mainRed()
         return button
     }()
     
@@ -111,7 +112,9 @@ class NewsCell: UICollectionViewCell {
         addFavorite.setImage(buttonImg, for: .normal)
     }
     
-    @objc func addFavoriteTapped(_ sender: Any) {
+    @objc func addFavoriteTapped(_ sender: UIButton) {
+        guard let button = sender as? HeartButton else { return }
+        button.flipLikedState()
         info.isFavorite.toggle()
         addFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         guard let cell = info else { return }
