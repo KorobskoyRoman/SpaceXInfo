@@ -49,8 +49,10 @@ class LibraryCell: UICollectionViewCell {
             let url = URL(string: imageUrl)
             patch.sd_setImage(with: url, completed: nil)
             nameLabel.text = info.name
+            
             let date = info.date.firstIndex(of: "T")
-            let updatedDate = info.date[..<date!]
+            guard let date = date else { return }
+            let updatedDate = info.date[..<date]
             dateLabel.text = "Start date: \(updatedDate)"
             if info.success == false {
                 successLabel.text = "Launch failed"
