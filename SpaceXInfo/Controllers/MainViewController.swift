@@ -47,6 +47,7 @@ class MainViewController: UIViewController {
         button.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
         return button
     }()
+    var likedLaunches = [RealmModel]()
     
     let reachability = try! Reachability()
     

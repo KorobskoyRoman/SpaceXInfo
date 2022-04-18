@@ -14,5 +14,6 @@ class RealmModel: Object {
     @Persisted var details: String = ""
     @Persisted var name: String = ""
     @Persisted var date: String = ""
+    @Persisted var isFavorite: Bool = false
 }
 

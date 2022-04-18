@@ -7,19 +7,15 @@
 
 import Foundation
 
-//struct LaunchData: Codable {
-//    let result: [Result]
-//}
-
 struct Result: Codable, Hashable {
     
     let uuid = UUID()
     let links: Links
     let rocket: String?
     let success: Bool?
-//    let failures: [Failure]
     let details: String?
     let name, dateUTC: String?
+    var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case links, rocket, success, details, name

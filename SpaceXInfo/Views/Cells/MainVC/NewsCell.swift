@@ -50,9 +50,8 @@ class NewsCell: UICollectionViewCell {
             let imageUrl = info.links.patch.small
             guard let imageUrl = imageUrl,
                   let url = URL(string: imageUrl)
-            else {
-                return
-            }
+            else { return }
+            
             imagePhoto.sd_setImage(with: url, completed: nil)
             let date = info.dateUTC?.firstIndex(of: "T")
             let updatedDate = info.dateUTC![..<date!]
@@ -70,13 +69,13 @@ class NewsCell: UICollectionViewCell {
     }
     let realm = try! Realm()
     var cell: RealmModel?
-    var isLiked: Bool = false
     
     override func layoutSubviews() { //округляем всю ячейку
         super.layoutSubviews()
         self.layer.cornerRadius = 10
+        updateFav()
     }
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
@@ -86,26 +85,34 @@ class NewsCell: UICollectionViewCell {
         self.layer.shadowRadius = 3
         self.layer.shadowOpacity = 0.5
         self.layer.shadowOffset = CGSize(width: 0, height: 4)
-        
         addFavorite.addTarget(self, action: #selector(addFavoriteTapped(_:)), for: .touchUpInside)
-        
-//        checkLaunch()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func checkLaunch() {
-//        let likes = RealmManager.shared.liked
-        let launchModel = RealmModel()
-//        if isLiked == true {
+    // апдейтим лайки из БД при загрузке приложения
+    private func updateFav() {
+        let savedLaunches = realm.objects(RealmModel.self)
+        let hasFav = savedLaunches.firstIndex { $0.name == self.info.name && $0.date == self.info.dateUTC } != nil
+        if hasFav {
+            info.isFavorite = true
             addFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            RealmManager.shared.deleteLaunch(launch: launchModel)
-//        }
+        } else {
+            info.isFavorite = false
+            addFavorite.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
+    
+    private func updateLikeButton() {
+        let image = info.isFavorite ? "heart.fill" : "heart"
+        let buttonImg = UIImage(systemName: image)
+        addFavorite.setImage(buttonImg, for: .normal)
     }
     
     @objc func addFavoriteTapped(_ sender: Any) {
+        info.isFavorite.toggle()
         addFavorite.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         guard let cell = info else { return }
         let launchModel = RealmModel()
@@ -115,13 +122,14 @@ class NewsCell: UICollectionViewCell {
         launchModel.success = cell.success ?? false
         launchModel.details = cell.details ?? ""
         launchModel.date = cell.dateUTC ?? ""
-        RealmManager.shared.saveLaunch(launch: launchModel)
-        RealmManager.shared.liked.append(launchModel)
-        
-        if isLiked == true {
-            checkLaunch()
+        // обработка кнопки лайка
+        launchModel.isFavorite = info.isFavorite
+        updateLikeButton()
+        if info.isFavorite {
+            RealmManager.shared.saveLaunch(launch: launchModel)
+        } else {
+            RealmManager.shared.deleteLaunch(launch: launchModel)
         }
-        isLiked = true
     }
     
     private func setConstraints() {
