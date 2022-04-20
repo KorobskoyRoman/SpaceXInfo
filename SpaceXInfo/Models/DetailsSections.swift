@@ -11,7 +11,7 @@ enum DetailsSections: Int, CaseIterable {
     func description() -> String {
         switch self {
         case .info:
-            return "Information"
+            return ""
         }
     }
 }
