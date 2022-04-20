@@ -60,6 +60,13 @@ class MainViewController: UIViewController {
         fetchData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("will appear")
+        fetchData()
+        applySnapshot()
+    }
+    
     private func fetchData() {
         reachability.whenReachable = { reachability in
             if reachability.connection == .cellular || reachability.connection == .wifi {

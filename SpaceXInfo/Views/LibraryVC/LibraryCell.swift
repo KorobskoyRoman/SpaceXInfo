@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SDWebImage
+import RealmSwift
 
 class LibraryCell: UICollectionViewCell {
     static let reuseId = "reuseId"
@@ -33,6 +34,7 @@ class LibraryCell: UICollectionViewCell {
     var successLabel = UILabel()
     var addFavorite: UIButton = {
         let button = HeartButton()
+        button.isLiked = true
         button.tintColor = .mainRed()
         return button
     }()
@@ -87,9 +89,14 @@ class LibraryCell: UICollectionViewCell {
     
     @objc private func addFavoriteTapped(_ sender: UIButton) {
         guard let button = sender as? HeartButton else { return }
-        button.flipLikedState()
-//        info.isFavorite.toggle()
-        RealmManager.shared.deleteLaunch(launch: info)
+        button.isLiked = false
+        DispatchQueue.main.async {
+            button.flipLikedState()
+            var launch: Result?
+            launch?.isFavorite = self.info.isFavorite
+            launch?.isFavorite.toggle()
+            RealmManager.shared.deleteLaunch(launch: self.info)
+        }
     }
     
     private func setConstraints() {

@@ -12,12 +12,15 @@ class HeartButton: UIButton {
     
     private let unlikedImg = UIImage(systemName: "heart")
     private let likedImg = UIImage(systemName: "heart.fill")
-    private var isLiked: Bool = false
+    var isLiked: Bool = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setImage(unlikedImg, for: .normal)
+        if isLiked {
+            setImage(likedImg, for: .normal)
+        } else {
+            setImage(unlikedImg, for: .normal)
+        }
     }
     
     required init?(coder: NSCoder) {
