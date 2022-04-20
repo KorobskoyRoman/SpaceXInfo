@@ -38,6 +38,7 @@ class LibraryCell: UICollectionViewCell {
         button.tintColor = .mainRed()
         return button
     }()
+    var launch: Result?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -90,13 +91,10 @@ class LibraryCell: UICollectionViewCell {
     @objc private func addFavoriteTapped(_ sender: UIButton) {
         guard let button = sender as? HeartButton else { return }
         button.isLiked = false
-        DispatchQueue.main.async {
-            button.flipLikedState()
-            var launch: Result?
-            launch?.isFavorite = self.info.isFavorite
-            launch?.isFavorite.toggle()
-            RealmManager.shared.deleteLaunch(launch: self.info)
-        }
+        button.flipLikedState()
+        launch?.isFavorite = self.info.isFavorite
+        launch?.isFavorite.toggle()
+        RealmManager.shared.deleteLaunch(launch: self.info)
     }
     
     private func setConstraints() {

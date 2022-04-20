@@ -104,6 +104,7 @@ extension LibraryViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LibraryCell.reuseId, for: indexPath) as! LibraryCell
                 //configure cell
                 cell.info =  itemIdentifier
+                cell.addFavorite.addTarget(self, action: #selector(self.addFavTapped), for: .touchUpInside)
                 return cell
             }
         }
@@ -131,6 +132,11 @@ extension LibraryViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(likes.toArray(), toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+    
+    @objc private func addFavTapped() {
+        applySnapshot()
+        loadLaunches()
     }
 }
 
@@ -164,5 +170,17 @@ extension LibraryViewController: UISearchResultsUpdating {
 }
 
 extension LibraryViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let section = LibrarySection(rawValue: indexPath.section) else { fatalError("No section") }
+        switch section {
+        case .main:
+            let cell = collectionView.cellForItem(at: indexPath) as! LibraryCell
+            let detailsVC = LibraryDetailsViewController()
+            let info = cell.info
+            guard let info = info else { return }
+            detailsVC.info = info
+            print("selected \(indexPath.item)")
+            navigationController?.pushViewController(detailsVC, animated: true)
+        }
+    }
 }
