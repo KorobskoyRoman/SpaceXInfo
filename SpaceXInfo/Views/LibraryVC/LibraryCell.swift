@@ -32,9 +32,8 @@ class LibraryCell: UICollectionViewCell {
     }()
     var successLabel = UILabel()
     var addFavorite: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        button.imageView?.tintColor = .mainRed()
+        let button = HeartButton()
+        button.tintColor = .mainRed()
         return button
     }()
     
@@ -63,6 +62,7 @@ class LibraryCell: UICollectionViewCell {
             }
         }
     }
+    var cell: RealmModel?
     
     override func layoutSubviews() { //округляем всю ячейку
         super.layoutSubviews()
@@ -78,10 +78,18 @@ class LibraryCell: UICollectionViewCell {
         self.layer.shadowRadius = 3
         self.layer.shadowOpacity = 0.5
         self.layer.shadowOffset = CGSize(width: 0, height: 4)
+        addFavorite.addTarget(self, action: #selector(addFavoriteTapped(_:)), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func addFavoriteTapped(_ sender: UIButton) {
+        guard let button = sender as? HeartButton else { return }
+        button.flipLikedState()
+//        info.isFavorite.toggle()
+        RealmManager.shared.deleteLaunch(launch: info)
     }
     
     private func setConstraints() {
