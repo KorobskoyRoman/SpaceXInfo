@@ -31,7 +31,11 @@ class RealmManager {
         let predicate = NSPredicate(format: "name=%@", launch.name)
         do {
             try localRealm.write({
+                if !localRealm.isEmpty {
                 localRealm.delete(localRealm.objects(RealmModel.self).filter(predicate))
+                } else {
+                    print("realm is empty!")
+                }
             })
         } catch {
             print(error)

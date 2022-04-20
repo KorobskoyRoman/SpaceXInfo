@@ -35,8 +35,6 @@ class NewsCell: UICollectionViewCell {
     var successLabel = UILabel()
     var addFavorite: UIButton = {
         let button = HeartButton()
-        //        button.setImage(UIImage(systemName: "heart"), for: .normal)
-        //        button.imageView?.tintColor = .mainRed()
         button.tintColor = .mainRed()
         return button
     }()
