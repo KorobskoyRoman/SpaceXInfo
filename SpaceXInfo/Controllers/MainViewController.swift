@@ -227,8 +227,8 @@ extension MainViewController: UICollectionViewDelegate {
         case .mainSection:
             let cell = collectionView.cellForItem(at: indexPath) as! NewsCell
             let detailsVC = DetailsViewController()
-            let image = cell.info
-            guard let image = image else { return }
+            let info = cell.info
+            guard let image = info else { return }
             detailsVC.info = image
             navigationController?.pushViewController(detailsVC, animated: true)
         }

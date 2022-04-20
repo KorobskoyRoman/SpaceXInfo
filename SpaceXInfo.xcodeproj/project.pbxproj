@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C7D184A280E2272001AAA42 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D1849280E2272001AAA42 /* HeartButton.swift */; };
+		9C7D184C28109E3A001AAA42 /* LibraryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D184B28109E3A001AAA42 /* LibraryDetailsViewController.swift */; };
 		9CBA1361280767B100F77CDC /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA1360280767B100F77CDC /* RealmManager.swift */; };
 		9CBA13632808646800F77CDC /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA13622808646800F77CDC /* MainTabBarController.swift */; };
 		9CBA1365280865F900F77CDC /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA1364280865F900F77CDC /* LibraryViewController.swift */; };
@@ -40,6 +41,7 @@
 		4ECA929C234960E298E78B8D /* Pods-SpaceXInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXInfo.debug.xcconfig"; path = "Target Support Files/Pods-SpaceXInfo/Pods-SpaceXInfo.debug.xcconfig"; sourceTree = "<group>"; };
 		6FA7262CE89D686DA69D0365 /* Pods-SpaceXInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXInfo.release.xcconfig"; path = "Target Support Files/Pods-SpaceXInfo/Pods-SpaceXInfo.release.xcconfig"; sourceTree = "<group>"; };
 		9C7D1849280E2272001AAA42 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
+		9C7D184B28109E3A001AAA42 /* LibraryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryDetailsViewController.swift; sourceTree = "<group>"; };
 		9CBA1360280767B100F77CDC /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		9CBA13622808646800F77CDC /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		9CBA1364280865F900F77CDC /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				9CFC776427F7564200E50FCA /* MainViewController.swift */,
 				9CFC778B27FDF88C00E50FCA /* DetailsViewController.swift */,
 				9CBA1364280865F900F77CDC /* LibraryViewController.swift */,
+				9C7D184B28109E3A001AAA42 /* LibraryDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				9CFEF6392805FB4F00DF5F79 /* GradientView.swift in Sources */,
 				9CFC778A27FCBAD000E50FCA /* UIView + Extension.swift in Sources */,
 				9CFC777827F75A5800E50FCA /* Section.swift in Sources */,
+				9C7D184C28109E3A001AAA42 /* LibraryDetailsViewController.swift in Sources */,
 				9CFC778E27FE0F7600E50FCA /* DetailsSections.swift in Sources */,
 				9CFC778827FCB01200E50FCA /* ShowAlert.swift in Sources */,
 				9CFC777E27F7669B00E50FCA /* SectionHeader.swift in Sources */,

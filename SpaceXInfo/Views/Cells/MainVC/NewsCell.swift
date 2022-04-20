@@ -123,6 +123,7 @@ class NewsCell: UICollectionViewCell {
         launchModel.success = cell.success ?? false
         launchModel.details = cell.details ?? ""
         launchModel.date = cell.dateUTC ?? ""
+        launchModel.videoLink = cell.links.webcast ?? ""
         // обработка кнопки лайка
         launchModel.isFavorite = info.isFavorite
         updateLikeButton()

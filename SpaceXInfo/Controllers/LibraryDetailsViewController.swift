@@ -1,17 +1,17 @@
 //
-//  DetailsViewController.swift
+//  LibraryDetailsViewController.swift
 //  SpaceXInfo
 //
-//  Created by Roman Korobskoy on 06.04.2022.
+//  Created by Roman Korobskoy on 20.04.2022.
 //
 
 import Foundation
 import UIKit
 
-class DetailsViewController: UIViewController {
+class LibraryDetailsViewController: UIViewController {
     
-    typealias DataSource = UICollectionViewDiffableDataSource<DetailsSections, Result>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<DetailsSections, Result>
+    typealias DataSource = UICollectionViewDiffableDataSource<DetailsSections, RealmModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<DetailsSections, RealmModel>
     
     private var collectionView: UICollectionView!
     private lazy var dataSource = createDiffableDataSource()
@@ -21,8 +21,8 @@ class DetailsViewController: UIViewController {
         imageView.image = UIImage(named: "mars")
         return imageView
     }()
-
-    var info: Result!
+    
+    var info: RealmModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class DetailsViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .mainWhite()
         collectionView.allowsMultipleSelection = true
-        title = "SpaceX info"
+        title = "Your favorite launches"
         collectionView.backgroundColor = .mainBlue()
         collectionView.isScrollEnabled = false
         collectionView.register(InfoCell.self, forCellWithReuseIdentifier: InfoCell.reuseId)
@@ -47,9 +47,7 @@ class DetailsViewController: UIViewController {
     }
 }
 
-// MARK: - Creating layout
-
-extension DetailsViewController {
+extension LibraryDetailsViewController {
     private func createCompositialLayout() ->  UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnviroment in
             guard let section = DetailsSections(rawValue: sectionIndex) else {
@@ -93,9 +91,7 @@ extension DetailsViewController {
     }
 }
 
-// MARK: - Creating data source
-
-extension DetailsViewController {
+extension LibraryDetailsViewController {
     private func createDiffableDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, info in
             guard let section = DetailsSections(rawValue: indexPath.section) else {
@@ -104,7 +100,7 @@ extension DetailsViewController {
             switch section {
             case .info:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoCell.reuseId, for: indexPath) as! InfoCell
-                cell.info = info
+                cell.infoRealm = info
                 return cell
             }
         }
@@ -128,7 +124,7 @@ extension DetailsViewController {
     }
 }
 
-extension DetailsViewController {
+extension LibraryDetailsViewController {
     private func setConstraints() {
         marsImage.contentMode = .scaleAspectFit
         marsImage.clipsToBounds = true

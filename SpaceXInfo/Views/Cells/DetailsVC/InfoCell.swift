@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import YouTubePlayer
+import SwiftUI
 
 class InfoCell: UICollectionViewCell {
     
@@ -57,6 +58,7 @@ class InfoCell: UICollectionViewCell {
             nameLabel.text = "🌙 \(info.name ?? "no data")"
             rocketLabel.text = "🚀 id: \(info.rocket ?? "no data")"
             successLabel.text = "\(info.success ?? false)"
+            
             if successLabel.text == "false" {
                 successLabel.text = "❌ Launch failed"
                 successLabel.textColor = .mainRed()
@@ -65,6 +67,30 @@ class InfoCell: UICollectionViewCell {
                 successLabel.textColor = .mainGreen()
             }
             detailsLabel.text = info.details
+        }
+    }
+    
+    var infoRealm: RealmModel! {
+        didSet {
+            let imageUrl = infoRealm.link
+            let url = URL(string: imageUrl)
+            patch.sd_setImage(with: url, completed: nil)
+            let link = infoRealm.videoLink //video
+            guard let videoLink = URL(string: link) else { return }
+            playerView.loadVideoURL(videoLink)
+            
+            nameLabel.text = "🌙 \(infoRealm.name)"
+            rocketLabel.text = "🚀 id: \(infoRealm.rocket)"
+            successLabel.text = "\(infoRealm.success)"
+            detailsLabel.text = infoRealm.details
+            
+            if successLabel.text == "false" {
+                successLabel.text = "❌ Launch failed"
+                successLabel.textColor = .mainRed()
+            } else if successLabel.text == "true" {
+                successLabel.text = "✅ Launch successed"
+                successLabel.textColor = .mainGreen()
+            }
         }
     }
     
