@@ -11,7 +11,7 @@ enum Section: Int, CaseIterable {
     func description() -> String {
         switch self {
         case .mainSection:
-            return "SpaceX launches"
+            return ""
         }
     }
 }

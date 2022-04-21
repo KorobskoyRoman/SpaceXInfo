@@ -54,10 +54,15 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .mainBlue()
+        navigationController?.navigationBar.prefersLargeTitles = true
         setupCollectionView()
         applySnapshot()
         setConstraints()
         fetchData()
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainWhite(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: UIFont.Weight.bold) ]
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

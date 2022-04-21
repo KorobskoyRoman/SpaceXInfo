@@ -21,14 +21,22 @@ class LibraryViewController: UIViewController {
     private lazy var deleteAllButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAllButtonTapped))
     }()
+    private var sorted: [RealmModel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Favorites"
         view.backgroundColor = .mainBlue()
+        navigationController?.navigationBar.prefersLargeTitles = true
         setupCollectionView()
         loadLaunches()
         configurateSearchController()
+        searchController.searchBar.delegate = self
+        searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainWhite(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: UIFont.Weight.bold) ]
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +44,12 @@ class LibraryViewController: UIViewController {
         loadLaunches()
         applySnapshot()
         print(likes.count)
+//        searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
     }
     
     private func loadLaunches() {
@@ -145,6 +159,7 @@ extension LibraryViewController: UISearchResultsUpdating {
         likes = filteredItems(for: searchController.searchBar.text)
         applySnapshot()
         loadLaunches()
+//        searchController.automaticallyShowsScopeBar = true
     }
     
     func filteredItems(for query: String?) -> Results<RealmModel> {
@@ -166,6 +181,35 @@ extension LibraryViewController: UISearchResultsUpdating {
         searchController.searchBar.tintColor = .mainWhite()
         searchController.searchBar.searchTextField.textColor = .mainWhite()
         searchController.searchBar.searchTextField.backgroundColor = .secondaryBlue()
+        // filters
+        searchController.searchBar.showsScopeBar = true
+        searchController.searchBar.scopeButtonTitles = ["Name", "Date", "Success"]
+        searchController.searchBar.selectedScopeButtonIndex = 0
+        if searchController.searchBar.selectedScopeButtonIndex == 0 {
+            likes = sortItems(byKeyPath: "name", ascending: true)
+            searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
+            print("triggers sort by name")
+        }
+//        searchController.searchBar.showsScopeBar = false
+    }
+    
+    private func sortItems(byKeyPath: String, ascending: Bool) -> Results<RealmModel> {
+        return likes.sorted(byKeyPath: byKeyPath, ascending: ascending)
+    }
+}
+
+extension LibraryViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        if selectedScope == 0 {
+            likes = sortItems(byKeyPath: "name", ascending: true)
+            applySnapshot()
+        } else if selectedScope == 1 {
+            likes = sortItems(byKeyPath: "date", ascending: false)
+            applySnapshot()
+        } else if selectedScope == 2 {
+            likes = sortItems(byKeyPath: "success", ascending: false)
+            applySnapshot()
+        }
     }
 }
 
