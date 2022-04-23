@@ -22,6 +22,9 @@ class LibraryViewController: UIViewController {
         return UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAllButtonTapped))
     }()
     private var sorted: [RealmModel]!
+    private lazy var showFiltersButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .plain, target: self, action: #selector(showFiltersButtonTapped))
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +36,6 @@ class LibraryViewController: UIViewController {
         configurateSearchController()
         searchController.searchBar.delegate = self
         searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
-        
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainWhite(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: UIFont.Weight.bold) ]
         }
@@ -44,7 +46,7 @@ class LibraryViewController: UIViewController {
         loadLaunches()
         applySnapshot()
         print(likes.count)
-//        searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
+        searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,6 +74,28 @@ class LibraryViewController: UIViewController {
     @objc private func deleteAllButtonTapped(_ sender: UIBarButtonItem) {
         realm.deleteAll()
         applySnapshot()
+    }
+    
+    @objc private func showFiltersButtonTapped(_ sender: UIBarButtonItem) {
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.translatesAutoresizingMaskIntoConstraints = false
+        if searchController.searchBar.showsScopeBar == false {
+            print("scope bar shows")
+            self.collectionView.topAnchor.constraint(equalTo: self.searchController.searchBar.bottomAnchor, constant: 10).isActive = true
+            UIView.animate(withDuration: 0.5, delay: 0) {
+                self.searchController.searchBar.showsScopeBar = true
+                self.collectionView.layoutIfNeeded()
+                self.applySnapshot()
+            }
+        } else {
+            print("scope bar hidden")
+            self.collectionView.topAnchor.constraint(equalTo: self.searchController.searchBar.bottomAnchor).isActive = true
+            UIView.animate(withDuration: 0.5, delay: 0) {
+                self.searchController.searchBar.showsScopeBar = false
+                self.collectionView.layoutIfNeeded()
+                self.applySnapshot()
+            }
+        }
     }
 }
 
@@ -182,7 +206,7 @@ extension LibraryViewController: UISearchResultsUpdating {
         searchController.searchBar.searchTextField.textColor = .mainWhite()
         searchController.searchBar.searchTextField.backgroundColor = .secondaryBlue()
         // filters
-        searchController.searchBar.showsScopeBar = true
+//        searchController.searchBar.showsScopeBar = true
         searchController.searchBar.scopeButtonTitles = ["Name", "Date", "Success"]
         searchController.searchBar.selectedScopeButtonIndex = 0
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
@@ -190,6 +214,7 @@ extension LibraryViewController: UISearchResultsUpdating {
             searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
             print("triggers sort by name")
         }
+        navigationItem.rightBarButtonItem = showFiltersButton
 //        searchController.searchBar.showsScopeBar = false
     }
     
