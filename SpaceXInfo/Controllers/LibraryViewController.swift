@@ -183,7 +183,6 @@ extension LibraryViewController: UISearchResultsUpdating {
         likes = filteredItems(for: searchController.searchBar.text)
         applySnapshot()
         loadLaunches()
-//        searchController.automaticallyShowsScopeBar = true
     }
     
     func filteredItems(for query: String?) -> Results<RealmModel> {
@@ -206,7 +205,6 @@ extension LibraryViewController: UISearchResultsUpdating {
         searchController.searchBar.searchTextField.textColor = .mainWhite()
         searchController.searchBar.searchTextField.backgroundColor = .secondaryBlue()
         // filters
-//        searchController.searchBar.showsScopeBar = true
         searchController.searchBar.scopeButtonTitles = ["Name", "Date", "Success"]
         searchController.searchBar.selectedScopeButtonIndex = 0
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
@@ -215,7 +213,6 @@ extension LibraryViewController: UISearchResultsUpdating {
             print("triggers sort by name")
         }
         navigationItem.rightBarButtonItem = showFiltersButton
-//        searchController.searchBar.showsScopeBar = false
     }
     
     private func sortItems(byKeyPath: String, ascending: Bool) -> Results<RealmModel> {
