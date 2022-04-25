@@ -19,8 +19,6 @@ class RealmManager {
         do {
             try localRealm.write({
                 localRealm.add(launch)
-//                liked.append(launch)
-//                print(launch)
             })
         } catch {
             print(error)
