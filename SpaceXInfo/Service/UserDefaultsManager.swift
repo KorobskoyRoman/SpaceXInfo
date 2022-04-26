@@ -6,16 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
 class UserDefaultsManager {
     static let shared = UserDefaultsManager()
     let defaults = UserDefaults.standard
+    let key = "darkMode"
     var darkMode: Bool = false
     
-    func saveModeCondition() {
-        print("до нажатия \(darkMode)")
+    func saveModeCondition(_ sender: UISwitch) {
+        defaults.set(sender.isOn, forKey: key)
         darkMode.toggle()
-        print("после нажатия \(darkMode)")
-        defaults.set(darkMode, forKey: "condition")
     }
 }
