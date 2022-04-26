@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-func showAlert(title: String, message: String, controller: UIViewController) {
-    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+func showAlert(title: String, message: String, controller: UIViewController, preferredStyle: UIAlertController.Style = .alert) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
     let okAction = UIAlertAction(title: "OK", style: .default)
     
     alert.addAction(okAction)

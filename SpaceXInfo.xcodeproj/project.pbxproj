@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		9C7D184A280E2272001AAA42 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D1849280E2272001AAA42 /* HeartButton.swift */; };
 		9C7D184C28109E3A001AAA42 /* LibraryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D184B28109E3A001AAA42 /* LibraryDetailsViewController.swift */; };
+		9C7D184E28184DEC001AAA42 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D184D28184DEC001AAA42 /* UserDefaultsManager.swift */; };
 		9CBA1361280767B100F77CDC /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA1360280767B100F77CDC /* RealmManager.swift */; };
 		9CBA13632808646800F77CDC /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA13622808646800F77CDC /* MainTabBarController.swift */; };
 		9CBA1365280865F900F77CDC /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA1364280865F900F77CDC /* LibraryViewController.swift */; };
 		9CBA13682808B31600F77CDC /* LibraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA13672808B31600F77CDC /* LibraryCell.swift */; };
 		9CBA136B2808B3B500F77CDC /* LibrarySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA136A2808B3B500F77CDC /* LibrarySection.swift */; };
 		9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCBDD4C2807614F00F7E214 /* RealmModel.swift */; };
+		9CCDFD82281856DB001342CF /* SettingsBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFD81281856DB001342CF /* SettingsBottomSheet.swift */; };
+		9CCDFD8528185AB7001342CF /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 9CCDFD8428185AB7001342CF /* BottomSheet */; };
 		9CFC776127F7564200E50FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776027F7564200E50FCA /* AppDelegate.swift */; };
 		9CFC776327F7564200E50FCA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776227F7564200E50FCA /* SceneDelegate.swift */; };
 		9CFC776527F7564200E50FCA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776427F7564200E50FCA /* MainViewController.swift */; };
@@ -42,12 +45,14 @@
 		6FA7262CE89D686DA69D0365 /* Pods-SpaceXInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXInfo.release.xcconfig"; path = "Target Support Files/Pods-SpaceXInfo/Pods-SpaceXInfo.release.xcconfig"; sourceTree = "<group>"; };
 		9C7D1849280E2272001AAA42 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		9C7D184B28109E3A001AAA42 /* LibraryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryDetailsViewController.swift; sourceTree = "<group>"; };
+		9C7D184D28184DEC001AAA42 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		9CBA1360280767B100F77CDC /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		9CBA13622808646800F77CDC /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		9CBA1364280865F900F77CDC /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		9CBA13672808B31600F77CDC /* LibraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCell.swift; sourceTree = "<group>"; };
 		9CBA136A2808B3B500F77CDC /* LibrarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySection.swift; sourceTree = "<group>"; };
 		9CCBDD4C2807614F00F7E214 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		9CCDFD81281856DB001342CF /* SettingsBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBottomSheet.swift; sourceTree = "<group>"; };
 		9CFC775D27F7564200E50FCA /* SpaceXInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceXInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CFC776027F7564200E50FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CFC776227F7564200E50FCA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B51B5431D79D19EAEE3A667F /* Pods_SpaceXInfo.framework in Frameworks */,
+				9CCDFD8528185AB7001342CF /* BottomSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +168,7 @@
 				9CFC778B27FDF88C00E50FCA /* DetailsViewController.swift */,
 				9CBA1364280865F900F77CDC /* LibraryViewController.swift */,
 				9C7D184B28109E3A001AAA42 /* LibraryDetailsViewController.swift */,
+				9CCDFD81281856DB001342CF /* SettingsBottomSheet.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -204,6 +211,7 @@
 				9CFC778427F77A7600E50FCA /* NetworkManager.swift */,
 				9CFEF6362805CA9200DF5F79 /* Reachability.swift */,
 				9CBA1360280767B100F77CDC /* RealmManager.swift */,
+				9C7D184D28184DEC001AAA42 /* UserDefaultsManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -260,6 +268,9 @@
 			dependencies = (
 			);
 			name = SpaceXInfo;
+			packageProductDependencies = (
+				9CCDFD8428185AB7001342CF /* BottomSheet */,
+			);
 			productName = SpaceXInfo;
 			productReference = 9CFC775D27F7564200E50FCA /* SpaceXInfo.app */;
 			productType = "com.apple.product-type.application";
@@ -288,6 +299,9 @@
 				Base,
 			);
 			mainGroup = 9CFC775427F7564200E50FCA;
+			packageReferences = (
+				9CCDFD8328185AB7001342CF /* XCRemoteSwiftPackageReference "BottomSheet" */,
+			);
 			productRefGroup = 9CFC775E27F7564200E50FCA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -372,11 +386,13 @@
 				9CFC778E27FE0F7600E50FCA /* DetailsSections.swift in Sources */,
 				9CFC778827FCB01200E50FCA /* ShowAlert.swift in Sources */,
 				9CFC777E27F7669B00E50FCA /* SectionHeader.swift in Sources */,
+				9C7D184E28184DEC001AAA42 /* UserDefaultsManager.swift in Sources */,
 				9CBA1361280767B100F77CDC /* RealmManager.swift in Sources */,
 				9CFC776127F7564200E50FCA /* AppDelegate.swift in Sources */,
 				9CFC776327F7564200E50FCA /* SceneDelegate.swift in Sources */,
 				9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */,
 				9CFC777B27F7636D00E50FCA /* NewsCell.swift in Sources */,
+				9CCDFD82281856DB001342CF /* SettingsBottomSheet.swift in Sources */,
 				9C7D184A280E2272001AAA42 /* HeartButton.swift in Sources */,
 				9CFC778C27FDF88C00E50FCA /* DetailsViewController.swift in Sources */,
 				9CFEF6372805CA9300DF5F79 /* Reachability.swift in Sources */,
@@ -592,6 +608,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9CCDFD8328185AB7001342CF /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joomcode/BottomSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9CCDFD8428185AB7001342CF /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CCDFD8328185AB7001342CF /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9CFC775527F7564200E50FCA /* Project object */;
 }
