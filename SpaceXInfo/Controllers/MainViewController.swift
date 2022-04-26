@@ -75,6 +75,7 @@ class MainViewController: UIViewController {
         print("will appear")
         fetchData()
         applySnapshot()
+        checkForDarkMode()
     }
     
     private func fetchData() {
