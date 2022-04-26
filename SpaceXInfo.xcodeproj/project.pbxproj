@@ -18,6 +18,7 @@
 		9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCBDD4C2807614F00F7E214 /* RealmModel.swift */; };
 		9CCDFD82281856DB001342CF /* SettingsBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFD81281856DB001342CF /* SettingsBottomSheet.swift */; };
 		9CCDFD8528185AB7001342CF /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 9CCDFD8428185AB7001342CF /* BottomSheet */; };
+		9CCDFD872818791D001342CF /* CheckDarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFD862818791D001342CF /* CheckDarkMode.swift */; };
 		9CFC776127F7564200E50FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776027F7564200E50FCA /* AppDelegate.swift */; };
 		9CFC776327F7564200E50FCA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776227F7564200E50FCA /* SceneDelegate.swift */; };
 		9CFC776527F7564200E50FCA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC776427F7564200E50FCA /* MainViewController.swift */; };
@@ -53,6 +54,7 @@
 		9CBA136A2808B3B500F77CDC /* LibrarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySection.swift; sourceTree = "<group>"; };
 		9CCBDD4C2807614F00F7E214 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		9CCDFD81281856DB001342CF /* SettingsBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBottomSheet.swift; sourceTree = "<group>"; };
+		9CCDFD862818791D001342CF /* CheckDarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDarkMode.swift; sourceTree = "<group>"; };
 		9CFC775D27F7564200E50FCA /* SpaceXInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceXInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CFC776027F7564200E50FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CFC776227F7564200E50FCA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				9CFC779327FE273A00E50FCA /* UIFont + Extension.swift */,
 				9CFEF6382805FB4F00DF5F79 /* GradientView.swift */,
 				9C7D1849280E2272001AAA42 /* HeartButton.swift */,
+				9CCDFD862818791D001342CF /* CheckDarkMode.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				9C7D184E28184DEC001AAA42 /* UserDefaultsManager.swift in Sources */,
 				9CBA1361280767B100F77CDC /* RealmManager.swift in Sources */,
 				9CFC776127F7564200E50FCA /* AppDelegate.swift in Sources */,
+				9CCDFD872818791D001342CF /* CheckDarkMode.swift in Sources */,
 				9CFC776327F7564200E50FCA /* SceneDelegate.swift in Sources */,
 				9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */,
 				9CFC777B27F7636D00E50FCA /* NewsCell.swift in Sources */,
