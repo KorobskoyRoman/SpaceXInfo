@@ -21,7 +21,7 @@ final class SettingsBottomSheet: UIViewController {
         let uiSwitch = UISwitch()
         uiSwitch.preferredStyle = .automatic
         uiSwitch.translatesAutoresizingMaskIntoConstraints = false
-        uiSwitch.isOn = UserDefaultsManager.shared.darkMode
+        uiSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultsManager.shared.key)
         return uiSwitch
     }()
     private let conditionLabel: UILabel = {
@@ -29,6 +29,14 @@ final class SettingsBottomSheet: UIViewController {
         label.text = "Enable dark mode"
         label.textColor = .mainGray()
         label.font = .sfPro20()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "You need to restart application for apply changes!"
+        label.font = .sfPro10()
+        label.textColor = .mainGray()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -77,15 +85,14 @@ final class SettingsBottomSheet: UIViewController {
     private func setupSubviews() {
         view.backgroundColor = .mainWhite()
         _scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
         conditionLabel.translatesAutoresizingMaskIntoConstraints = false
         switchMode.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(_scrollView)
         _scrollView.alwaysBounceVertical = true
         
-//        stackView = UIStackView(arrangedSubviews: [switchMode, conditionLabel])
         _scrollView.addSubview(conditionLabel)
         _scrollView.addSubview(switchMode)
+        _scrollView.addSubview(infoLabel)
         
         NSLayoutConstraint.activate([
             _scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -105,14 +112,19 @@ final class SettingsBottomSheet: UIViewController {
             switchMode.leadingAnchor.constraint(equalTo: conditionLabel.trailingAnchor, constant: 10),
             switchMode.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
+        
+        NSLayoutConstraint.activate([
+            infoLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+        ])
     }
     
     @objc private func switchModeSwitched(_ sender: UISwitch) {
         print("tapped switch \(sender.isOn)")
-//        let darkModeSwitchAct = "condition"
-//        let darkModeSwitchIsOn = UserDefaultsManager.shared.defaults.bool(forKey: darkModeSwitchAct)
-        UserDefaultsManager.shared.saveModeCondition()
-//        switchMode.isOn = UserDefaultsManager.shared.darkMode
+        UserDefaultsManager.shared.saveModeCondition(switchMode)
+        for (key, value) in UserDefaultsManager.shared.defaults.dictionaryRepresentation() {
+            print("\(key) = \(value) \n")
+        }
     }
 }
 

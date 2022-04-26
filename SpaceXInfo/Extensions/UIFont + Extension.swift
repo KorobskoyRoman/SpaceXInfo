@@ -16,4 +16,8 @@ extension UIFont {
     static func sfPro20() -> UIFont? {
         return UIFont.init(name: "SF Pro", size: 20)
     }
+    
+    static func sfPro10() -> UIFont? {
+        return UIFont.init(name: "SF Pro", size: 10)
+    }
 }

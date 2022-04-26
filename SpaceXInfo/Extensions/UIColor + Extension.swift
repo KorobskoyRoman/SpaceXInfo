@@ -30,7 +30,7 @@ extension UIColor {
     }
     
     static func mainBlue() -> UIColor {
-        return UserDefaultsManager.shared.darkMode ?  #colorLiteral(red: 0.5823046565, green: 0.6129545569, blue: 0.8444568515, alpha: 1) : #colorLiteral(red: 0.3332670331, green: 0.3184727132, blue: 0.85743469, alpha: 1)
+        return UserDefaults.standard.bool(forKey: UserDefaultsManager.shared.key) ?  #colorLiteral(red: 0.5823046565, green: 0.6129545569, blue: 0.8444568515, alpha: 1) : #colorLiteral(red: 0.3332670331, green: 0.3184727132, blue: 0.85743469, alpha: 1)
 //        return #colorLiteral(red: 0.3332670331, green: 0.3184727132, blue: 0.85743469, alpha: 1)
     }
     
