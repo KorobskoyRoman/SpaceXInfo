@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BottomSheet
 
 class MainViewController: UIViewController {
 
@@ -43,10 +44,14 @@ class MainViewController: UIViewController {
         button.layer.shadowRadius = 3
         button.layer.shadowOpacity = 0.5
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
-//        button.applyGradients(cornerRadius: 10)
         button.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
         return button
     }()
+    private lazy var settingsButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+        return button
+    }()
+    private var transitionDelegate: UIViewControllerTransitioningDelegate?
     var likedLaunches = [RealmModel]()
     
     let reachability = try! Reachability()
@@ -123,6 +128,7 @@ class MainViewController: UIViewController {
         collectionView.register(NewsCell.self, forCellWithReuseIdentifier: NewsCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
         collectionView.delegate = self
+        navigationItem.rightBarButtonItem = settingsButton
     }
     
     private func showErrorContent() {
@@ -143,6 +149,17 @@ class MainViewController: UIViewController {
         DispatchQueue.main.async {
             self.fetchData()
         }
+    }
+    
+    @objc private func settingsButtonTapped() {
+        let viewController = SettingsBottomSheet(initialHeight: 100)
+        let navigationController = BottomSheetNavigationController(rootViewController: viewController)
+        transitionDelegate = BottomSheetTransitioningDelegate(presentationControllerFactory: self)
+        navigationController.transitioningDelegate = transitionDelegate
+        navigationController.modalPresentationStyle = .custom
+        present(navigationController, animated: true, completion: nil)
+//        UserDefaultsManager.shared.saveModeCondition()
+        print(UserDefaultsManager.shared.darkMode)
     }
 }
 
@@ -271,5 +288,27 @@ extension MainViewController {
             reloadButton.heightAnchor.constraint(equalToConstant: 40),
             reloadButton.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor)
         ])
+    }
+}
+
+extension MainViewController: BottomSheetPresentationControllerFactory {
+    func makeBottomSheetPresentationController(
+        presentedViewController: UIViewController,
+        presentingViewController: UIViewController?
+    ) -> BottomSheetPresentationController {
+        .init(
+            presentedViewController: presentedViewController,
+            presentingViewController: presentingViewController,
+            dismissalHandler: self
+        )
+    }
+}
+
+extension MainViewController: BottomSheetModalDismissalHandler {
+    var canBeDismissed: Bool { true }
+    
+    func performDismissal(animated: Bool) {
+        presentedViewController?.dismiss(animated: animated, completion: nil)
+        transitionDelegate = nil
     }
 }
