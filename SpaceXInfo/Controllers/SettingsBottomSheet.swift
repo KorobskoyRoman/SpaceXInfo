@@ -63,6 +63,7 @@ final class SettingsBottomSheet: UIViewController {
         setupSubviews()
         updatePreferredContentSize()
         switchMode.addTarget(self, action: #selector(switchModeSwitched), for: .valueChanged)
+        view.backgroundColor = .mainBlack()
     }
     
     override func viewWillAppear(_ animated: Bool) {
