@@ -8,5 +8,5 @@
 import Foundation
 
 public func checkForDarkMode() {
-    print("checkedamdfannahadhadfhdfhdfa")
+    print("checked")
 }

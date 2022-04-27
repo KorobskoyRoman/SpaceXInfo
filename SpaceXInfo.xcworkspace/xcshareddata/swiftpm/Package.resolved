@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "bottomsheet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/joomcode/BottomSheet",
+      "state" : {
+        "revision" : "5f7e1ae9eea80942ca97f7da1613f6918a5f7679",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}
