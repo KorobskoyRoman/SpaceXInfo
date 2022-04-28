@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     private lazy var dataSource = createDiffableDataSource()
     private var launches = [Result]()
     private let networkManager = NetworkManager()
+    private var searchController = UISearchController(searchResultsController: nil)
     
     lazy private var loadingErrorLabel: UILabel = {
         let label = UILabel()
@@ -59,15 +60,16 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .mainBlue()
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.prefersLargeTitles = true
         setupCollectionView()
         applySnapshot()
         setConstraints()
         fetchData()
+//        configurateSearchController()
         
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainWhite(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: UIFont.Weight.bold) ]
-        }
+//        if #available(iOS 11.0, *) {
+//            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainWhite(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: UIFont.Weight.bold) ]
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -311,5 +313,25 @@ extension MainViewController: BottomSheetModalDismissalHandler {
     func performDismissal(animated: Bool) {
         presentedViewController?.dismiss(animated: animated, completion: nil)
         transitionDelegate = nil
+    }
+}
+
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        applySnapshot()
+    }
+    
+    private func configurateSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search favorites"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.tintColor = .mainWhite()
+        searchController.searchBar.searchTextField.textColor = .mainWhite()
+        searchController.searchBar.searchTextField.backgroundColor = .secondaryBlue()
     }
 }
