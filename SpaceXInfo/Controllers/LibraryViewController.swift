@@ -30,15 +30,16 @@ class LibraryViewController: UIViewController {
         super.viewDidLoad()
         title = "Favorites"
         view.backgroundColor = .mainBlue()
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.prefersLargeTitles = true
         setupCollectionView()
         loadLaunches()
         configurateSearchController()
         searchController.searchBar.delegate = self
         searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainWhite(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: UIFont.Weight.bold) ]
-        }
+        
+//        if #available(iOS 11.0, *) {
+//            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainWhite(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: UIFont.Weight.bold) ]
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
