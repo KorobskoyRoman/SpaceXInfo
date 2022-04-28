@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HeartButton: UIButton {
+final class HeartButton: UIButton {
     
     private let unlikedImg = UIImage(systemName: "heart")
     private let likedImg = UIImage(systemName: "heart.fill")
