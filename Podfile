@@ -9,5 +9,9 @@ target 'SpaceXInfo' do
 pod 'SDWebImage'
 pod 'YouTubePlayer'
 pod 'RealmSwift', '~>10'
+pod 'RxSwift', '6.5.0'
+pod 'RxCocoa', '6.5.0'
+pod "RxGesture"
+pod 'SnapKit', '~> 5.6.0'
 
 end

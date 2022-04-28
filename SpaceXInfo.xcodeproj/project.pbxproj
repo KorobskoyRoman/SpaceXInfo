@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C408068281AEA2900381D81 /* CustomTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C408067281AEA2900381D81 /* CustomTabItem.swift */; };
+		9C40806A281AEF9300381D81 /* UIStackView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C408069281AEF9300381D81 /* UIStackView + Extension.swift */; };
+		9C40806C281AEFBA00381D81 /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40806B281AEFBA00381D81 /* UILabel + Extension.swift */; };
+		9C40806E281AF3C900381D81 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40806D281AF3C900381D81 /* CustomTabBar.swift */; };
+		9C408070281AF7FF00381D81 /* CustomItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C40806F281AF7FF00381D81 /* CustomItemView.swift */; };
+		9C408072281AFF6A00381D81 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C408071281AFF6A00381D81 /* CustomTabBarController.swift */; };
 		9C7D184A280E2272001AAA42 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D1849280E2272001AAA42 /* HeartButton.swift */; };
 		9C7D184C28109E3A001AAA42 /* LibraryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D184B28109E3A001AAA42 /* LibraryDetailsViewController.swift */; };
 		9C7D184E28184DEC001AAA42 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D184D28184DEC001AAA42 /* UserDefaultsManager.swift */; };
@@ -44,6 +50,12 @@
 /* Begin PBXFileReference section */
 		4ECA929C234960E298E78B8D /* Pods-SpaceXInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXInfo.debug.xcconfig"; path = "Target Support Files/Pods-SpaceXInfo/Pods-SpaceXInfo.debug.xcconfig"; sourceTree = "<group>"; };
 		6FA7262CE89D686DA69D0365 /* Pods-SpaceXInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceXInfo.release.xcconfig"; path = "Target Support Files/Pods-SpaceXInfo/Pods-SpaceXInfo.release.xcconfig"; sourceTree = "<group>"; };
+		9C408067281AEA2900381D81 /* CustomTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabItem.swift; sourceTree = "<group>"; };
+		9C408069281AEF9300381D81 /* UIStackView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extension.swift"; sourceTree = "<group>"; };
+		9C40806B281AEFBA00381D81 /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
+		9C40806D281AF3C900381D81 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		9C40806F281AF7FF00381D81 /* CustomItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomItemView.swift; sourceTree = "<group>"; };
+		9C408071281AFF6A00381D81 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		9C7D1849280E2272001AAA42 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		9C7D184B28109E3A001AAA42 /* LibraryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryDetailsViewController.swift; sourceTree = "<group>"; };
 		9C7D184D28184DEC001AAA42 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -99,6 +111,17 @@
 				6FA7262CE89D686DA69D0365 /* Pods-SpaceXInfo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9C408064281ADFCE00381D81 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				9C408067281AEA2900381D81 /* CustomTabItem.swift */,
+				9C40806D281AF3C900381D81 /* CustomTabBar.swift */,
+				9C40806F281AF7FF00381D81 /* CustomItemView.swift */,
+				9C408071281AFF6A00381D81 /* CustomTabBarController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		9CBA13662808B30400F77CDC /* LibraryVC */ = {
@@ -166,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				9CBA13622808646800F77CDC /* MainTabBarController.swift */,
+				9C408064281ADFCE00381D81 /* TabBar */,
 				9CFC776427F7564200E50FCA /* MainViewController.swift */,
 				9CFC778B27FDF88C00E50FCA /* DetailsViewController.swift */,
 				9CBA1364280865F900F77CDC /* LibraryViewController.swift */,
@@ -201,6 +225,8 @@
 				9CFC777F27F767AD00E50FCA /* UIColor + Extension.swift */,
 				9CFC778927FCBAD000E50FCA /* UIView + Extension.swift */,
 				9CFC779327FE273A00E50FCA /* UIFont + Extension.swift */,
+				9C408069281AEF9300381D81 /* UIStackView + Extension.swift */,
+				9C40806B281AEFBA00381D81 /* UILabel + Extension.swift */,
 				9CFEF6382805FB4F00DF5F79 /* GradientView.swift */,
 				9C7D1849280E2272001AAA42 /* HeartButton.swift */,
 				9CCDFD862818791D001342CF /* CheckDarkMode.swift */,
@@ -376,6 +402,7 @@
 				9CFC779427FE273A00E50FCA /* UIFont + Extension.swift in Sources */,
 				9CBA13682808B31600F77CDC /* LibraryCell.swift in Sources */,
 				9CFC778527F77A7600E50FCA /* NetworkManager.swift in Sources */,
+				9C40806A281AEF9300381D81 /* UIStackView + Extension.swift in Sources */,
 				9CBA13632808646800F77CDC /* MainTabBarController.swift in Sources */,
 				9CFC778227F76B7700E50FCA /* LaunchModel.swift in Sources */,
 				9CBA1365280865F900F77CDC /* LibraryViewController.swift in Sources */,
@@ -384,21 +411,26 @@
 				9CFC776527F7564200E50FCA /* MainViewController.swift in Sources */,
 				9CFEF6392805FB4F00DF5F79 /* GradientView.swift in Sources */,
 				9CFC778A27FCBAD000E50FCA /* UIView + Extension.swift in Sources */,
+				9C408072281AFF6A00381D81 /* CustomTabBarController.swift in Sources */,
 				9CFC777827F75A5800E50FCA /* Section.swift in Sources */,
 				9C7D184C28109E3A001AAA42 /* LibraryDetailsViewController.swift in Sources */,
 				9CFC778E27FE0F7600E50FCA /* DetailsSections.swift in Sources */,
+				9C40806C281AEFBA00381D81 /* UILabel + Extension.swift in Sources */,
 				9CFC778827FCB01200E50FCA /* ShowAlert.swift in Sources */,
 				9CFC777E27F7669B00E50FCA /* SectionHeader.swift in Sources */,
 				9C7D184E28184DEC001AAA42 /* UserDefaultsManager.swift in Sources */,
 				9CBA1361280767B100F77CDC /* RealmManager.swift in Sources */,
+				9C40806E281AF3C900381D81 /* CustomTabBar.swift in Sources */,
 				9CFC776127F7564200E50FCA /* AppDelegate.swift in Sources */,
 				9CCDFD872818791D001342CF /* CheckDarkMode.swift in Sources */,
 				9CFC776327F7564200E50FCA /* SceneDelegate.swift in Sources */,
 				9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */,
 				9CFC777B27F7636D00E50FCA /* NewsCell.swift in Sources */,
 				9CCDFD82281856DB001342CF /* SettingsBottomSheet.swift in Sources */,
+				9C408070281AF7FF00381D81 /* CustomItemView.swift in Sources */,
 				9C7D184A280E2272001AAA42 /* HeartButton.swift in Sources */,
 				9CFC778C27FDF88C00E50FCA /* DetailsViewController.swift in Sources */,
+				9C408068281AEA2900381D81 /* CustomTabItem.swift in Sources */,
 				9CFEF6372805CA9300DF5F79 /* Reachability.swift in Sources */,
 				9CFC779127FE155D00E50FCA /* InfoCell.swift in Sources */,
 			);
