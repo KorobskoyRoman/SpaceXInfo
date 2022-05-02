@@ -197,7 +197,8 @@ extension LibraryViewController: UISearchResultsUpdating {
     private func configurateSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search favorites"
+//        searchController.searchBar.placeholder = "Search favorites"
+        searchController.searchBar.placeholder = "searchPlaceholder".localized(tableName: "LibraryDetailsVC")
         navigationItem.searchController = searchController
         definesPresentationContext = true
         navigationItem.hidesSearchBarWhenScrolling = false

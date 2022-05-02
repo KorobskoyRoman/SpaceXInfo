@@ -30,6 +30,7 @@ class LibraryDetailsViewController: UIViewController {
         setupCollectionView()
         applySnapshot()
         setConstraints()
+        localize()
     }
     
     private func setupCollectionView() {
@@ -39,7 +40,7 @@ class LibraryDetailsViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .mainWhite()
         collectionView.allowsMultipleSelection = true
-        title = "Your favorite launches"
+//        title = "Your favorite launches"
         collectionView.backgroundColor = .mainBlue()
         collectionView.isScrollEnabled = false
         collectionView.register(InfoCell.self, forCellWithReuseIdentifier: InfoCell.reuseId)
@@ -136,5 +137,11 @@ extension LibraryDetailsViewController {
             marsImage.widthAnchor.constraint(equalToConstant: 150),
             marsImage.heightAnchor.constraint(equalToConstant: 150)
         ])
+    }
+}
+
+extension LibraryDetailsViewController {
+    private func localize() {
+        title = "title".localized(tableName: "LibraryDetailsVC")
     }
 }
