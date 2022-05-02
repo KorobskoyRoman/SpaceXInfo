@@ -65,6 +65,7 @@ class MainViewController: UIViewController {
         applySnapshot()
         setConstraints()
         fetchData()
+        localize()
 //        configurateSearchController()
         
 //        if #available(iOS 11.0, *) {
@@ -126,7 +127,7 @@ class MainViewController: UIViewController {
         collectionView.backgroundColor = .mainBlue()
         view.addSubview(collectionView)
         collectionView.allowsMultipleSelection = true
-        title = "SpaceX launches"
+//        title = "SpaceX launches"
         
         collectionView.register(NewsCell.self, forCellWithReuseIdentifier: NewsCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
@@ -333,5 +334,11 @@ extension MainViewController: UISearchResultsUpdating {
         searchController.searchBar.tintColor = .mainWhite()
         searchController.searchBar.searchTextField.textColor = .mainWhite()
         searchController.searchBar.searchTextField.backgroundColor = .secondaryBlue()
+    }
+}
+
+extension MainViewController {
+    private func localize() {
+        title = "titleMainVC".localized(tableName: "MainVC")
     }
 }

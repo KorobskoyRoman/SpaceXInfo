@@ -55,12 +55,16 @@ class LibraryCell: UICollectionViewCell {
             let date = info.date.firstIndex(of: "T")
             guard let date = date else { return }
             let updatedDate = info.date[..<date]
-            dateLabel.text = "Start date: \(updatedDate)"
+            let dateLabelText = "launchDate".localized(tableName: "LibraryVC")
+            dateLabel.text = "\(dateLabelText) \(updatedDate)"
+//            dateLabel.text = "Start date: \(updatedDate)"
             if info.success == false {
-                successLabel.text = "Launch failed"
+//                successLabel.text = "Launch failed"
+                successLabel.text = "lauchStatusFailed".localized(tableName: "LibraryVC")
                 successLabel.textColor = .mainRed()
             } else if info.success == true {
-                successLabel.text = "Launch successed"
+//                successLabel.text = "Launch successed"
+                successLabel.text = "lauchStatusSuccessed".localized(tableName: "LibraryVC")
                 successLabel.textColor = .mainGreen()
             }
         }
