@@ -119,7 +119,6 @@
 				9C408067281AEA2900381D81 /* CustomTabItem.swift */,
 				9C40806D281AF3C900381D81 /* CustomTabBar.swift */,
 				9C40806F281AF7FF00381D81 /* CustomItemView.swift */,
-				9C408071281AFF6A00381D81 /* CustomTabBarController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -140,6 +139,14 @@
 				9CBA136A2808B3B500F77CDC /* LibrarySection.swift */,
 			);
 			name = Sections;
+			sourceTree = "<group>";
+		};
+		9CE183CA28204F18009705BB /* OldTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				9CBA13622808646800F77CDC /* MainTabBarController.swift */,
+			);
+			path = OldTabBar;
 			sourceTree = "<group>";
 		};
 		9CFC775427F7564200E50FCA = {
@@ -188,8 +195,8 @@
 		9CFC777527F75A1D00E50FCA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9CBA13622808646800F77CDC /* MainTabBarController.swift */,
-				9C408064281ADFCE00381D81 /* TabBar */,
+				9CE183CA28204F18009705BB /* OldTabBar */,
+				9C408071281AFF6A00381D81 /* CustomTabBarController.swift */,
 				9CFC776427F7564200E50FCA /* MainViewController.swift */,
 				9CFC778B27FDF88C00E50FCA /* DetailsViewController.swift */,
 				9CBA1364280865F900F77CDC /* LibraryViewController.swift */,
@@ -251,6 +258,7 @@
 				9CFC777927F7635D00E50FCA /* Cells */,
 				9CBA13662808B30400F77CDC /* LibraryVC */,
 				9CFC778727FCB01200E50FCA /* ShowAlert.swift */,
+				9C408064281ADFCE00381D81 /* TabBar */,
 			);
 			path = Views;
 			sourceTree = "<group>";
