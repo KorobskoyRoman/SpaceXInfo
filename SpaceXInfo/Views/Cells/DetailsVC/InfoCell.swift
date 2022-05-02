@@ -87,10 +87,12 @@ class InfoCell: UICollectionViewCell {
             detailsLabel.text = infoRealm.details
             
             if successLabel.text == "false" {
-                successLabel.text = "❌ Launch failed"
+//                successLabel.text = "❌ Launch failed"
+                successLabel.text = "lauchStatusFailed".localized(tableName: "LibraryDetailsVC")
                 successLabel.textColor = .mainRed()
             } else if successLabel.text == "true" {
-                successLabel.text = "✅ Launch successed"
+//                successLabel.text = "✅ Launch successed"
+                successLabel.text = "lauchStatusSuccessed".localized(tableName: "LibraryDetailsVC")
                 successLabel.textColor = .mainGreen()
             }
         }

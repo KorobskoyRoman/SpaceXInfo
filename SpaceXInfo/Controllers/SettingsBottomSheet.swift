@@ -26,7 +26,8 @@ final class SettingsBottomSheet: UIViewController {
     }()
     private let conditionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Enable dark mode"
+//        label.text = "Enable dark mode"
+        label.text = "conditionLabel".localized(tableName: "SettingsBS")
         label.textColor = .mainGray()
         label.font = .sfPro20()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +35,9 @@ final class SettingsBottomSheet: UIViewController {
     }()
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
-        label.text = "You need to restart application for apply changes!"
+//        label.text = "You need to restart application for apply changes!"
+        label.text = "infoLabel".localized(tableName: "SettingsBS")
+        label.adjustsFontSizeToFitWidth = true
         label.font = .sfPro10()
         label.textColor = .mainGray()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +67,7 @@ final class SettingsBottomSheet: UIViewController {
         updatePreferredContentSize()
         switchMode.addTarget(self, action: #selector(switchModeSwitched), for: .valueChanged)
         view.backgroundColor = .mainBlack()
+        infoLabel.font = .systemFont(ofSize: 10)
     }
     
     override func viewWillAppear(_ animated: Bool) {

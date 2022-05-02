@@ -1,0 +1,10 @@
+/* 
+  SettingsBS.strings
+  SpaceXInfo
+
+  Created by Roman Korobskoy on 02.05.2022.
+  
+*/
+
+"conditionLabel" = "Enable dark mode";
+"infoLabel" = "You need to restart application for apply changes!";

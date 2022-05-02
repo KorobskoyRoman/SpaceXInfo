@@ -1,0 +1,10 @@
+/* 
+  SettingsBS.strings
+  SpaceXInfo
+
+  Created by Roman Korobskoy on 02.05.2022.
+  
+*/
+
+"conditionLabel" = "Включить темную тему";
+"infoLabel" = "Для применения изменений необходимо перезапустить приложение!";
