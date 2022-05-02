@@ -60,10 +60,12 @@ class InfoCell: UICollectionViewCell {
             successLabel.text = "\(info.success ?? false)"
             
             if successLabel.text == "false" {
-                successLabel.text = "❌ Launch failed"
+//                successLabel.text = "❌ Launch failed"
+                successLabel.text = "lauchStatusFailed".localized(tableName: "DetailsVC")
                 successLabel.textColor = .mainRed()
             } else if successLabel.text == "true" {
-                successLabel.text = "✅ Launch successed"
+//                successLabel.text = "✅ Launch successed"
+                successLabel.text = "lauchStatusSuccessed".localized(tableName: "DetailsVC")
                 successLabel.textColor = .mainGreen()
             }
             detailsLabel.text = info.details

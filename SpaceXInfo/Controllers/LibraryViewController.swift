@@ -28,7 +28,7 @@ class LibraryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Favorites"
+//        title = "Favorites"
         view.backgroundColor = .mainBlue()
 //        navigationController?.navigationBar.prefersLargeTitles = true
         setupCollectionView()
@@ -36,6 +36,7 @@ class LibraryViewController: UIViewController {
         configurateSearchController()
         searchController.searchBar.delegate = self
         searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
+        localize()
         
 //        if #available(iOS 11.0, *) {
 //            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainWhite(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: UIFont.Weight.bold) ]
@@ -65,7 +66,7 @@ class LibraryViewController: UIViewController {
         collectionView.backgroundColor = .mainBlue()
         view.addSubview(collectionView)
         collectionView.allowsMultipleSelection = true
-        title = "Favorites"
+//        title = "Favorites"
         
         collectionView.register(LibraryCell.self, forCellWithReuseIdentifier: LibraryCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
@@ -249,5 +250,11 @@ extension LibraryViewController: UICollectionViewDelegate {
             print("selected \(indexPath.item)")
             navigationController?.pushViewController(detailsVC, animated: true)
         }
+    }
+}
+
+extension LibraryViewController {
+    private func localize() {
+        title = "title".localized(tableName: "LibraryVC")
     }
 }

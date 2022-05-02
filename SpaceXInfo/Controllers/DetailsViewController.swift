@@ -30,6 +30,7 @@ class DetailsViewController: UIViewController {
         setupCollectionView()
         applySnapshot()
         setConstraints()
+        localize()
     }
     
     private func setupCollectionView() {
@@ -39,7 +40,7 @@ class DetailsViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .mainWhite()
         collectionView.allowsMultipleSelection = true
-        title = "SpaceX info"
+//        title = "SpaceX info"
         collectionView.backgroundColor = .mainBlue()
         collectionView.isScrollEnabled = false
         collectionView.register(InfoCell.self, forCellWithReuseIdentifier: InfoCell.reuseId)
@@ -140,5 +141,11 @@ extension DetailsViewController {
             marsImage.widthAnchor.constraint(equalToConstant: 150),
             marsImage.heightAnchor.constraint(equalToConstant: 150)
         ])
+    }
+}
+
+extension DetailsViewController {
+    private func localize() {
+        title = "title".localized(tableName: "DetailsVC")
     }
 }
