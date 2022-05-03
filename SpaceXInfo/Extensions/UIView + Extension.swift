@@ -22,7 +22,7 @@ extension UIView {
             // label setup
             let infoLabel: UILabel = {
                 let label = UILabel()
-                label.text = "Loading data..."
+                label.text = "LoadingLabel".localized(tableName: "MainVC")
                 label.font = .sfPro20()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 return label

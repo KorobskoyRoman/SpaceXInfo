@@ -8,3 +8,7 @@
 
 "conditionLabel" = "Enable dark mode";
 "infoLabel" = "You need to restart application for apply changes!";
+
+"languageInfo" = "Select language";
+
+"changeLang" = "Change language no available.\nApp language is your default system language.\nYou can change it in device settings.";

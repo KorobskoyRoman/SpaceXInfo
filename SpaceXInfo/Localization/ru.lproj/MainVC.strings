@@ -12,3 +12,5 @@
 "lauchStatusSuccessed" = "Успешный запуск";
 
 "launchDate" = "Дата запуска:";
+
+"LoadingLabel" = "Загрузка данных...";
