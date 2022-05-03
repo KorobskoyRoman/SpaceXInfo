@@ -12,3 +12,7 @@
 "lauchStatusSuccessed" = "Launch successed";
 
 "launchDate" = "Start date:";
+
+"nameFilter" = "Name";
+"dateFilter" = "Date";
+"successFilter" = "Success";
