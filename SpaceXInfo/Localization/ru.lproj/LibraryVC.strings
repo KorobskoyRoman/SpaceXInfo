@@ -13,3 +13,6 @@
 
 "launchDate" = "Дата запуска:";
 
+"nameFilter" = "Название";
+"dateFilter" = "Дата";
+"successFilter" = "Исход";

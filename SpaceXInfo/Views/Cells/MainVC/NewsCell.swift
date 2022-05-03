@@ -49,9 +49,15 @@ class NewsCell: UICollectionViewCell {
             let imageUrl = info.links.patch.small
             guard let imageUrl = imageUrl,
                   let url = URL(string: imageUrl)
-            else { return }
+            else {
+                imagePhoto.image = UIImage(named: "noPhoto")
+                return
+            }
             
             imagePhoto.sd_setImage(with: url, completed: nil)
+            imagePhoto.layer.masksToBounds = false
+            imagePhoto.layer.cornerRadius = imagePhoto.frame.size.height / 2
+            imagePhoto.clipsToBounds = true
             let date = info.dateUTC?.firstIndex(of: "T")
             let updatedDate = info.dateUTC![..<date!]
 //            dateLabel.text = "Start date: \(updatedDate)"

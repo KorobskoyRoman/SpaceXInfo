@@ -208,7 +208,12 @@ extension LibraryViewController: UISearchResultsUpdating {
         searchController.searchBar.searchTextField.textColor = .mainWhite()
         searchController.searchBar.searchTextField.backgroundColor = .secondaryBlue()
         // filters
-        searchController.searchBar.scopeButtonTitles = ["Name", "Date", "Success"]
+        let name = "nameFilter".localized(tableName: "LibraryVC")
+        let date = "dateFilter".localized(tableName: "LibraryVC")
+        let success = "successFilter".localized(tableName: "LibraryVC")
+        
+//        searchController.searchBar.scopeButtonTitles = ["Name", "Date", "Success"]
+        searchController.searchBar.scopeButtonTitles = [name, date, success]
         searchController.searchBar.selectedScopeButtonIndex = 0
         if searchController.searchBar.selectedScopeButtonIndex == 0 {
             likes = sortItems(byKeyPath: "name", ascending: true)

@@ -39,7 +39,13 @@ extension CustomTabItem {
         }
     }
     var name: String {
-        return self.rawValue.capitalized
+//        return self.rawValue.capitalized
+        switch self {
+        case .search:
+            return "search".localized(tableName: "CustomTabBar").localizedCapitalized
+        case .library:
+            return "library".localized(tableName: "CustomTabBar").localizedCapitalized
+        }
     }
     
     private func generateNavigationController(rootViewController: UIViewController, title: String) -> UIViewController {
