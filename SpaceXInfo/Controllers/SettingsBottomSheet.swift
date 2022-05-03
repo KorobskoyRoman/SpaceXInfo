@@ -43,14 +43,13 @@ final class SettingsBottomSheet: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-//    private var stackView: UIStackView = {
-//        let stackView = UIStackView()
-//        stackView.axis = .vertical
-//        stackView.spacing = 10
-//        stackView.distribution = .fillProportionally
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        return stackView
-//    }()
+    private let languageInfoButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("languageInfo".localized(tableName: "SettingsBS"), for: .normal)
+        button.setTitleColor(.mainGray(), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     init(initialHeight: CGFloat) {
         currentHeight = initialHeight
@@ -66,6 +65,7 @@ final class SettingsBottomSheet: UIViewController {
         setupSubviews()
         updatePreferredContentSize()
         switchMode.addTarget(self, action: #selector(switchModeSwitched), for: .valueChanged)
+        languageInfoButton.addTarget(self, action: #selector(languageInfoButtonTapped), for: .touchUpInside)
         view.backgroundColor = .mainBlack()
         infoLabel.font = .systemFont(ofSize: 10)
     }
@@ -98,6 +98,7 @@ final class SettingsBottomSheet: UIViewController {
         _scrollView.addSubview(conditionLabel)
         _scrollView.addSubview(switchMode)
         _scrollView.addSubview(infoLabel)
+        _scrollView.addSubview(languageInfoButton)
         
         NSLayoutConstraint.activate([
             _scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -122,14 +123,19 @@ final class SettingsBottomSheet: UIViewController {
             infoLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             infoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
+        
+        NSLayoutConstraint.activate([
+            languageInfoButton.topAnchor.constraint(equalTo: conditionLabel.bottomAnchor, constant: 20),
+            languageInfoButton.leadingAnchor.constraint(equalTo: conditionLabel.leadingAnchor)
+        ])
     }
     
     @objc private func switchModeSwitched(_ sender: UISwitch) {
-        print("tapped switch \(sender.isOn)")
+//        print("tapped switch \(sender.isOn)")
         UserDefaultsManager.shared.saveModeCondition(switchMode)
-        for (key, value) in UserDefaultsManager.shared.defaults.dictionaryRepresentation() {
-            print("\(key) = \(value) \n")
-        }
+//        for (key, value) in UserDefaultsManager.shared.defaults.dictionaryRepresentation() {
+//            print("\(key) = \(value) \n")
+//        }
     }
 }
 
@@ -139,3 +145,11 @@ extension SettingsBottomSheet: ScrollableBottomSheetPresentedController {
     }
 }
 
+extension SettingsBottomSheet {
+    @objc private func languageInfoButtonTapped() {
+        print("tapped")
+        let title = ""
+        let message = "changeLang".localized(tableName: "SettingsBS")
+        showAlert(title: title, message: message, controller: self)
+    }
+}
