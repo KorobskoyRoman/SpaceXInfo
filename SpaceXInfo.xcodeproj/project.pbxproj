@@ -27,7 +27,6 @@
 		9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCBDD4C2807614F00F7E214 /* RealmModel.swift */; };
 		9CCDFD82281856DB001342CF /* SettingsBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFD81281856DB001342CF /* SettingsBottomSheet.swift */; };
 		9CCDFD8528185AB7001342CF /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 9CCDFD8428185AB7001342CF /* BottomSheet */; };
-		9CCDFD872818791D001342CF /* CheckDarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCDFD862818791D001342CF /* CheckDarkMode.swift */; };
 		9CE183CD28205132009705BB /* MainVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9CE183CF28205132009705BB /* MainVC.strings */; };
 		9CE183D228205637009705BB /* String + Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE183D128205637009705BB /* String + Extenstion.swift */; };
 		9CE183D6282057BC009705BB /* CustomTabBar.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9CE183D8282057BC009705BB /* CustomTabBar.strings */; };
@@ -79,7 +78,6 @@
 		9CBA136A2808B3B500F77CDC /* LibrarySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySection.swift; sourceTree = "<group>"; };
 		9CCBDD4C2807614F00F7E214 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		9CCDFD81281856DB001342CF /* SettingsBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBottomSheet.swift; sourceTree = "<group>"; };
-		9CCDFD862818791D001342CF /* CheckDarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDarkMode.swift; sourceTree = "<group>"; };
 		9CE183CE28205132009705BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainVC.strings; sourceTree = "<group>"; };
 		9CE183D02820515B009705BB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainVC.strings; sourceTree = "<group>"; };
 		9CE183D128205637009705BB /* String + Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extenstion.swift"; sourceTree = "<group>"; };
@@ -272,7 +270,6 @@
 				9CE183D128205637009705BB /* String + Extenstion.swift */,
 				9CFEF6382805FB4F00DF5F79 /* GradientView.swift */,
 				9C7D1849280E2272001AAA42 /* HeartButton.swift */,
-				9CCDFD862818791D001342CF /* CheckDarkMode.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -473,7 +470,6 @@
 				9CBA1361280767B100F77CDC /* RealmManager.swift in Sources */,
 				9C40806E281AF3C900381D81 /* CustomTabBar.swift in Sources */,
 				9CFC776127F7564200E50FCA /* AppDelegate.swift in Sources */,
-				9CCDFD872818791D001342CF /* CheckDarkMode.swift in Sources */,
 				9CFC776327F7564200E50FCA /* SceneDelegate.swift in Sources */,
 				9CCBDD4D2807614F00F7E214 /* RealmModel.swift in Sources */,
 				9CFC777B27F7636D00E50FCA /* NewsCell.swift in Sources */,

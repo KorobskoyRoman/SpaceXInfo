@@ -12,3 +12,5 @@
 "lauchStatusSuccessed" = "Launch successed";
 
 "launchDate" = "Start date:";
+
+"LoadingLabel" = "Loading data...";
