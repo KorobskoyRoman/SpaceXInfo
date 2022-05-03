@@ -48,7 +48,10 @@ class InfoCell: UICollectionViewCell {
             let imageUrl = info.links.patch.small
             guard let imageUrl = imageUrl,
                   let url = URL(string: imageUrl)
-            else { return }
+            else {
+                patch.image = UIImage(named: "noPhoto")
+                return
+            }
             patch.sd_setImage(with: url, completed: nil)
             
             guard let link = info.links.webcast else { return }
