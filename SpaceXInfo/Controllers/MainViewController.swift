@@ -132,6 +132,7 @@ class MainViewController: UIViewController {
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
         collectionView.delegate = self
         navigationItem.rightBarButtonItem = settingsButton
+        collectionView.prefetchDataSource = self
     }
     
     private func showErrorContent() {
@@ -339,5 +340,21 @@ extension MainViewController: UISearchResultsUpdating {
 extension MainViewController {
     private func localize() {
         title = "titleMainVC".localized(tableName: "MainVC")
+    }
+}
+
+extension MainViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let indeces = indexPaths.map { "\($0.row)" }.joined(separator: ", ")
+        print(indeces)
+        for _ in indexPaths {
+            networkManager.fetchLaunches { [weak self] result in
+                if result != [Result]() {
+                    DispatchQueue.main.async {
+                        self?.launches = result
+                    }
+                }
+            }
+        }
     }
 }
