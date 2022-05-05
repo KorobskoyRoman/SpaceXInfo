@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
     private let networkManager = NetworkManager()
     private var searchController = UISearchController(searchResultsController: nil)
     
-    lazy private var loadingErrorLabel: UILabel = {
+    private lazy var loadingErrorLabel: UILabel = {
         let label = UILabel()
         label.text = "Oops it's seems like you're is currently offline!"
         label.textColor = .mainWhite()
@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
         label.font = .sfPro20()
         return label
     }()
-    lazy private var noWifiImage: UIImageView = {
+    private lazy var noWifiImage: UIImageView = {
         var image = UIImageView()
         image.image = UIImage(systemName: "wifi.slash")
         image.image?.withTintColor(.mainWhite())
@@ -62,9 +62,9 @@ class MainViewController: UIViewController {
         view.backgroundColor = .mainBlue()
 //        navigationController?.navigationBar.prefersLargeTitles = true
         setupCollectionView()
-        applySnapshot()
+//        applySnapshot()
         setConstraints()
-        fetchData()
+//        fetchData()
         localize()
 //        configurateSearchController()
         
@@ -76,8 +76,13 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("will appear")
+//        fetchData()
+//        applySnapshot()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         fetchData()
-        applySnapshot()
     }
     
     private func fetchData() {
@@ -86,7 +91,9 @@ class MainViewController: UIViewController {
                 self.collectionView.showLoading(style: .large, color: .mainWhite())
                 self.networkManager.fetchLaunches { [weak self] result in
                     if result != [Result]() {
-                        self?.launches = result
+//                        self?.launches = result
+                        let arr = result[..<20]
+                        self?.launches = Array(arr)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             self?.applySnapshot()
                             self?.collectionView.stopLoading()
@@ -259,6 +266,28 @@ extension MainViewController: UICollectionViewDelegate {
             navigationController?.pushViewController(detailsVC, animated: true)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let section = Section(rawValue: indexPath.section) else { return }
+        switch section {
+        case .mainSection:
+            let position = collectionView.contentOffset.y
+            var nextValue = 40
+            var oldValue = 20
+            if position > (collectionView.contentSize.height - 100 - collectionView.frame.size.height) {
+                networkManager.fetchLaunches { [weak self] results in
+                    let newData = Array(results[oldValue..<nextValue])
+                    print(self?.launches.count)
+                    self?.launches.append(contentsOf: newData) // какой-то щит грузится по 40 вместо 20
+                    DispatchQueue.main.async {
+                        self?.applySnapshot()
+                    }
+                }
+            }
+            oldValue = nextValue
+            nextValue += 20
+        }
+    }
 }
 
 extension MainViewController {
@@ -345,16 +374,14 @@ extension MainViewController {
 
 extension MainViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        let indeces = indexPaths.map { "\($0.row)" }.joined(separator: ", ")
-        print(indeces)
-        for _ in indexPaths {
-            networkManager.fetchLaunches { [weak self] result in
-                if result != [Result]() {
-                    DispatchQueue.main.async {
-                        self?.launches = result
-                    }
-                }
-            }
-        }
+//        for _ in indexPaths {
+//            networkManager.fetchLaunches { [weak self] result in
+//                if result != [Result]() {
+//                    DispatchQueue.main.async {
+//                        self?.launches = result
+//                    }
+//                }
+//            }
+//        }
     }
 }
