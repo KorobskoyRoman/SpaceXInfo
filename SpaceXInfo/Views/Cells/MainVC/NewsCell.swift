@@ -60,17 +60,14 @@ class NewsCell: UICollectionViewCell {
             imagePhoto.clipsToBounds = true
             let date = info.dateUTC?.firstIndex(of: "T")
             let updatedDate = info.dateUTC![..<date!]
-//            dateLabel.text = "Start date: \(updatedDate)"
             let dateLabeltext = "launchDate".localized(tableName: "MainVC")
             dateLabel.text = "\(dateLabeltext) \(updatedDate)"
             nameLabel.text = "\(info.name ?? "no data")"
             successLabel.text = "\(info.success ?? false)"
             if successLabel.text == "false" {
-//                successLabel.text = "Launch failed"
                 successLabel.text = "lauchStatusFailed".localized(tableName: "MainVC")
                 successLabel.textColor = .mainRed()
             } else if successLabel.text == "true" {
-//                successLabel.text = "Launch successed"
                 successLabel.text = "lauchStatusSuccessed".localized(tableName: "MainVC")
                 successLabel.textColor = .mainGreen()
             }
