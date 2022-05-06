@@ -18,6 +18,9 @@ class MainViewController: UIViewController {
     private var launches = [Result]()
     private let networkManager = NetworkManager()
     private var searchController = UISearchController(searchResultsController: nil)
+    // for pagination
+    private var oldValue: Int = 20
+    private var nextValue: Int = 40
     
     private lazy var loadingErrorLabel: UILabel = {
         let label = UILabel()
@@ -272,20 +275,22 @@ extension MainViewController: UICollectionViewDelegate {
         switch section {
         case .mainSection:
             let position = collectionView.contentOffset.y
-            var nextValue = 40
-            var oldValue = 20
-            if position > (collectionView.contentSize.height - 100 - collectionView.frame.size.height) {
+            
+            if position > (collectionView.contentSize.height - 230 - collectionView.frame.size.height) {
                 networkManager.fetchLaunches { [weak self] results in
-                    let newData = Array(results[oldValue..<nextValue])
-                    print(self?.launches.count)
-                    self?.launches.append(contentsOf: newData) // какой-то щит грузится по 40 вместо 20
+
+                    let newData = Array(results[self!.oldValue..<self!.nextValue])
+//                    print(self?.launches.count)
+//                    print(newData.first!.name ?? "")
+//                    print("old - \(self!.oldValue) ||| next - \(self!.nextValue)")
+                    self?.launches.append(contentsOf: newData)
                     DispatchQueue.main.async {
                         self?.applySnapshot()
                     }
                 }
+                oldValue = nextValue
+                nextValue += 20
             }
-            oldValue = nextValue
-            nextValue += 20
         }
     }
 }
