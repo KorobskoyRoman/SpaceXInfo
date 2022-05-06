@@ -64,16 +64,15 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .mainBlue()
 //        navigationController?.navigationBar.prefersLargeTitles = true
-        setupCollectionView()
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
+            self.setupCollectionView()
+        }, completion: nil)
+//        setupCollectionView()
 //        applySnapshot()
         setConstraints()
 //        fetchData()
         localize()
 //        configurateSearchController()
-        
-//        if #available(iOS 11.0, *) {
-//            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainWhite(), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 31, weight: UIFont.Weight.bold) ]
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

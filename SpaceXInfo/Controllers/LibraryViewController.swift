@@ -25,6 +25,7 @@ class LibraryViewController: UIViewController {
     private lazy var showFiltersButton: UIBarButtonItem = {
         return UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .plain, target: self, action: #selector(showFiltersButtonTapped))
     }()
+    private var isFiltersOpen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,23 +80,41 @@ class LibraryViewController: UIViewController {
     }
     
     @objc private func showFiltersButtonTapped(_ sender: UIBarButtonItem) {
+        isFiltersOpen.toggle()
+//        navigationController?.navigationBar.superview?.constraints.forEach({ constraint in
+//            constraint.constant = isFiltersOpen ? 3333 : 1
+//            return
+//        })
+        let newConstraint = NSLayoutConstraint(item: collectionView!,
+                                               attribute: .top,
+                                               relatedBy: .equal,
+                                               toItem: navigationController?.navigationBar,
+                                               attribute: .bottom,
+                                               multiplier: isFiltersOpen ? 0.67 : 1.0,
+                                               constant: 0)
+        newConstraint.isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         searchController.searchBar.sizeToFit()
         searchController.searchBar.translatesAutoresizingMaskIntoConstraints = false
-        if searchController.searchBar.showsScopeBar == false {
+        if isFiltersOpen {
             print("scope bar shows")
-            self.collectionView.topAnchor.constraint(equalTo: self.searchController.searchBar.bottomAnchor, constant: 10).isActive = true
-            UIView.animate(withDuration: 0.5, delay: 0) {
+//            self.collectionView.topAnchor.constraint(equalTo: self.searchController.searchBar.bottomAnchor, constant: 10).isActive = true
+            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10.0, options: .curveEaseIn) {
+//                self.searchController.searchBar.frame = CGRect(x: 0, y: 0, width: 0, height: 100)
+//                self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: 333, height: 300)
+                self.collectionView.frame = CGRect(x: 0, y: 0, width: self.collectionView.frame.width, height: self.view.frame.height - 50)
                 self.searchController.searchBar.showsScopeBar = true
-                self.collectionView.layoutIfNeeded()
-                self.applySnapshot()
+                self.view.layoutIfNeeded()
+//                self.applySnapshot()
             }
         } else {
             print("scope bar hidden")
-            self.collectionView.topAnchor.constraint(equalTo: self.searchController.searchBar.bottomAnchor).isActive = true
-            UIView.animate(withDuration: 0.5, delay: 0) {
+//            self.collectionView.topAnchor.constraint(equalTo: self.searchController.searchBar.bottomAnchor).isActive = true
+            UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10.0, options: .curveEaseIn) {
+                self.collectionView.frame = CGRect(x: 0, y: 0, width: self.collectionView.frame.width, height: self.view.frame.height + 50)
                 self.searchController.searchBar.showsScopeBar = false
-                self.collectionView.layoutIfNeeded()
-                self.applySnapshot()
+                self.view.layoutIfNeeded()
+//                self.applySnapshot()
             }
         }
     }

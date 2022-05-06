@@ -52,7 +52,7 @@ final class CustomItemView: UIView {
         }
         
         iconImageView.snp.makeConstraints {
-            $0.height.width.equalTo(40)
+            $0.height.width.equalTo(25)
             $0.top.equalToSuperview()
             $0.bottom.equalTo(nameLabel.snp.top)
             $0.centerX.equalToSuperview()
@@ -64,7 +64,7 @@ final class CustomItemView: UIView {
         }
         
         underlineView.snp.makeConstraints {
-            $0.width.equalTo(40)
+            $0.width.equalTo(25)
             $0.height.equalTo(4)
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(nameLabel.snp.centerY)
