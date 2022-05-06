@@ -14,8 +14,8 @@
             filePath = "SpaceXInfo/Controllers/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "applySnapshot(animatingDifferences:)"
             landmarkType = "7">
          </BreakpointContent>
