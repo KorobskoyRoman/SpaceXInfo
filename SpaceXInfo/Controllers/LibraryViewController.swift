@@ -48,13 +48,20 @@ class LibraryViewController: UIViewController {
         super.viewWillAppear(animated)
         loadLaunches()
         applySnapshot()
-        print(likes.count)
+//        print(likes.count)
         searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
+        collectionView.layer.masksToBounds = true
+        collectionView.center.x -= view.bounds.width
+//        collectionView.frame = CGRect(x: -1000, y: -1000, width: self.collectionView.frame.width-200, height: self.collectionView.frame.height-500)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: 0)
+        UIView.animate(withDuration: 0.33, delay: 0, options: .curveLinear, animations: {
+            self.collectionView.center.x += self.view.bounds.width
+//            self.collectionView.frame = CGRect(x: 0, y: 0, width: self.collectionView.frame.width+200, height: self.collectionView.frame.height+500)
+        }, completion: nil)
     }
     
     private func loadLaunches() {
