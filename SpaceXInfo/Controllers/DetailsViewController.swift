@@ -21,6 +21,12 @@ class DetailsViewController: UIViewController {
         imageView.image = UIImage(named: "mars")
         return imageView
     }()
+    private lazy var moonImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "moon")
+        return imageView
+    }()
 
     var info: Result!
     
@@ -31,6 +37,27 @@ class DetailsViewController: UIViewController {
         applySnapshot()
         setConstraints()
         localize()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        marsImage.alpha = 0.0
+        moonImage.alpha = 0.0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear, animations: {
+            self.marsImage.alpha = 1.0
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear, animations: {
+            self.moonImage.alpha = 1.0
+        }, completion: nil)
+        moonImage.frame.origin.x = CGFloat(250)
+        
+        animateImage(marsImage)
+        animateImage(moonImage)
     }
     
     private func setupCollectionView() {
@@ -45,6 +72,18 @@ class DetailsViewController: UIViewController {
         collectionView.isScrollEnabled = false
         collectionView.register(InfoCell.self, forCellWithReuseIdentifier: InfoCell.reuseId)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
+    }
+    
+    private func animateImage(_ image: UIImageView) {
+        let speed = 20.0 / view.frame.size.width
+        let duration = (view.frame.size.width - image.frame.origin.x) * speed
+        
+        UIView.animate(withDuration: TimeInterval(duration), delay: 0.0, options: .curveLinear) {
+            image.frame.origin.x = self.view.frame.size.width
+        } completion: { _ in
+            image.frame.origin.x = -image.frame.size.width
+            self.animateImage(image)
+        }
     }
 }
 
@@ -134,12 +173,20 @@ extension DetailsViewController {
         marsImage.contentMode = .scaleAspectFit
         marsImage.clipsToBounds = true
         view.addSubview(marsImage)
+        view.addSubview(moonImage)
         
         NSLayoutConstraint.activate([
             marsImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             marsImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             marsImage.widthAnchor.constraint(equalToConstant: 150),
             marsImage.heightAnchor.constraint(equalToConstant: 150)
+        ])
+        
+        NSLayoutConstraint.activate([
+            moonImage.bottomAnchor.constraint(equalTo: marsImage.topAnchor, constant: 10),
+            moonImage.trailingAnchor.constraint(equalTo: marsImage.trailingAnchor, constant: -20),
+            moonImage.widthAnchor.constraint(equalToConstant: 25),
+            moonImage.heightAnchor.constraint(equalToConstant: 25)
         ])
     }
 }
