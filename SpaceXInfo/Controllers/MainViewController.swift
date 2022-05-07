@@ -80,6 +80,17 @@ class MainViewController: UIViewController {
         print("will appear")
 //        fetchData()
 //        applySnapshot()
+        collectionView.layer.masksToBounds = true
+        collectionView.center.y -= view.bounds.height
+        collectionView.alpha = 0.0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.33, delay: 0, options: .curveLinear, animations: {
+            self.collectionView.center.y += self.view.bounds.height
+            self.collectionView.alpha = 1.0
+        }, completion: nil)
     }
     
     override func viewWillLayoutSubviews() {
@@ -277,14 +288,12 @@ extension MainViewController: UICollectionViewDelegate {
             
             if position > (collectionView.contentSize.height - 230 - collectionView.frame.size.height) {
                 networkManager.fetchLaunches { [weak self] results in
-
-                    let newData = Array(results[self!.oldValue..<self!.nextValue])
-//                    print(self?.launches.count)
-//                    print(newData.first!.name ?? "")
-//                    print("old - \(self!.oldValue) ||| next - \(self!.nextValue)")
-                    self?.launches.append(contentsOf: newData)
-                    DispatchQueue.main.async {
-                        self?.applySnapshot()
+                    if self!.nextValue <= results.count {
+                        let newData = Array(results[self!.oldValue..<self!.nextValue])
+                        self?.launches.append(contentsOf: newData)
+                        DispatchQueue.main.async {
+                            self?.applySnapshot()
+                        }
                     }
                 }
                 oldValue = nextValue
